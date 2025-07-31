@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://oi6prrwx6swl"]
+
+[ext_resource type="Script" uid="uid://bujvqg6ej62xk" path="res://scenes/menus/main_menu.gd" id="1_ovrgc"]
+[ext_resource type="Texture2D" uid="uid://1jukk3ps8tln" path="res://textures/icon.svg" id="1_xqga4"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ovrgc")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="TitleAndButtonsContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TitleContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/TitleAndButtonsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="TitleRect" type="TextureRect" parent="PanelContainer/MarginContainer/TitleAndButtonsContainer/TitleContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("1_xqga4")
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/TitleAndButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ContinueButton" type="Button" parent="PanelContainer/MarginContainer/TitleAndButtonsContainer/ButtonsContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="LevelSelectButton" type="Button" parent="PanelContainer/MarginContainer/TitleAndButtonsContainer/ButtonsContainer"]
+layout_mode = 2
+text = "Level Select"
+
+[node name="SettingsButton" type="Button" parent="PanelContainer/MarginContainer/TitleAndButtonsContainer/ButtonsContainer"]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="ExitButton" type="Button" parent="PanelContainer/MarginContainer/TitleAndButtonsContainer/ButtonsContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/TitleAndButtonsContainer/ButtonsContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/TitleAndButtonsContainer/ButtonsContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,0 +1,221 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjijbyubeoryh"]
+
+[ext_resource type="Script" uid="uid://bvqf8upp78ws6" path="res://scenes/menus/settings_menu.gd" id="1_hayap"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hayap")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="SettingsContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="VolumeLabel" type="Label" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer"]
+layout_mode = 2
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeContainer" type="HSplitContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer"]
+layout_mode = 2
+dragging_enabled = false
+dragger_visibility = 1
+
+[node name="VolumeSettingsLabelContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 10
+
+[node name="MainVolumeLabelContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsLabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MainVolumeLabel" type="Label" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsLabelContainer/MainVolumeLabelContainer"]
+layout_mode = 2
+text = "Main"
+horizontal_alignment = 2
+
+[node name="MusicVolumeLabelContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsLabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MusicVolumeLabel" type="Label" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsLabelContainer/MusicVolumeLabelContainer"]
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 2
+
+[node name="SFXVolumeLabelContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsLabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="SFXVolumeLabel" type="Label" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsLabelContainer/SFXVolumeLabelContainer"]
+layout_mode = 2
+text = "SFX"
+horizontal_alignment = 2
+
+[node name="VolumeSettingsControlContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="MainVolumeControlContainer" type="PanelContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer/MarginContainer"]
+layout_mode = 2
+dragging_enabled = false
+dragger_visibility = 1
+
+[node name="MainVolumeSlider" type="HSlider" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer/MarginContainer/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+value = 30.0
+rounded = true
+tick_count = 11
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer/MarginContainer/HSplitContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer/MarginContainer/HSplitContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 3
+
+[node name="Label" type="Label" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer/MarginContainer/HSplitContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "100"
+visible_characters = 3
+visible_ratio = 1.5
+
+[node name="MusicVolumeControlContainer" type="PanelContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MusicVolumeControlContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MusicVolumeSlider" type="HSlider" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MusicVolumeControlContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 30.0
+rounded = true
+tick_count = 11
+
+[node name="SFXVolumeControlContainer" type="PanelContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/SFXVolumeControlContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SFXVolumeSlider" type="HSlider" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/SFXVolumeControlContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 30.0
+rounded = true
+tick_count = 11
+
+[node name="AccessibilityLabel" type="Label" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer"]
+layout_mode = 2
+text = "Accessibility"
+horizontal_alignment = 1
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer"]
+layout_mode = 2
+
+[node name="AccessibilityLabelsContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/HSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/HSplitContainer2/AccessibilityLabelsContainer"]
+layout_mode = 2
+text = "Color Blind Mode"
+horizontal_alignment = 2
+
+[node name="AccessibilityControlsContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/HSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorBlindModeSelection" type="OptionButton" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/HSplitContainer2/AccessibilityControlsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+selected = 0
+item_count = 4
+popup/item_0/text = "None"
+popup/item_0/id = 3
+popup/item_1/text = "Protanopia"
+popup/item_1/id = 0
+popup/item_2/text = "Deuteranopia"
+popup/item_2/id = 1
+popup/item_3/text = "Tritanpoia"
+popup/item_3/id = 2
+
+[node name="BackButton" type="Button" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to Main Menu"
+
+[connection signal="drag_ended" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer/MarginContainer/HSplitContainer/MainVolumeSlider" to="." method="_on_main_volume_slider_drag_ended"]
+[connection signal="value_changed" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer/MarginContainer/HSplitContainer/MainVolumeSlider" to="." method="_on_main_volume_slider_value_changed"]
+[connection signal="drag_ended" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MusicVolumeControlContainer/MarginContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_drag_ended"]
+[connection signal="value_changed" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MusicVolumeControlContainer/MarginContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="drag_ended" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/SFXVolumeControlContainer/MarginContainer/SFXVolumeSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="value_changed" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/SFXVolumeControlContainer/MarginContainer/SFXVolumeSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="item_selected" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/HSplitContainer2/AccessibilityControlsContainer/ColorBlindModeSelection" to="." method="_on_button_item_selected"]
+[connection signal="pressed" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/BackButton" to="." method="_on_back_button_pressed"]
