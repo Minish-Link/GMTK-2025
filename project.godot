@@ -13,12 +13,30 @@ config_version=5
 config/name="Loop Puzzles"
 config/tags=PackedStringArray("game_jam", "puzzle")
 run/main_scene="uid://gqwiva4bf35d"
-config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://textures/icon.svg"
+
+[autoload]
+
+TOML="*res://addons/not_full_toml_yet/parser_writer.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [dotnet]
 
 project/assembly_name="Loop Puzzles"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/not_full_toml_yet/plugin.cfg")
 
 [rendering]
 

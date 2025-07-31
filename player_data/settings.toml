@@ -1,0 +1,8 @@
+
+[accessibility]
+  color_blind = 0
+
+[volume]
+  sfx = 30.0
+  music = 30.0
+  main = 30.0
