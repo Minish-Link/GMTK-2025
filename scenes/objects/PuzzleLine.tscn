@@ -15,7 +15,6 @@ grow_vertical = 2
 
 [node name="Rotation" type="Node2D" parent="." node_paths=PackedStringArray("PointA", "PointB")]
 z_index = 1
-rotation = 0.785398
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_p5ewx")
 PointA = NodePath("LinePoint1")
@@ -43,7 +42,7 @@ scale = Vector2(1, 1)
 
 [node name="Line2D" type="Line2D" parent="Rotation"]
 unique_name_in_owner = true
-points = PackedVector2Array(-25, 25, 25, -25)
+points = PackedVector2Array(-25, 0, 25, 0)
 width = 5.0
 
 [connection signal="gui_input" from="Rotation/Button" to="Rotation/Button" method="_on_Button_gui_input"]

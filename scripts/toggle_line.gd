@@ -12,7 +12,7 @@ enum LineState {
 }
 
 func _enter_tree():
-	state = LineState.Erased
+	state = LineState.Blank
 
 var state: LineState
 
@@ -20,22 +20,19 @@ func _on_Button_gui_input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
-				print("Boop")
 				if state == LineState.Blank:
 					state = LineState.Red
 				else:
 					state = LineState.Blank
+				get_node("/root/MainScene/PuzzleGrid")._check_loops()
 				get_parent()._draw()
 			MOUSE_BUTTON_RIGHT:
-				print("Bap")
 				if state == LineState.Erased:
 					state = LineState.Blank
 				else:
 					state = LineState.Erased
+				get_node("/root/MainScene/PuzzleGrid")._check_loops()
 				get_parent()._draw()
-
-#func _draw():
-#	get_parent()._draw()
 
 func _get_state() -> int:
 	return int(state)
