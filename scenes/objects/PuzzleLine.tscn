@@ -1,14 +1,49 @@
-[gd_scene format=3 uid="uid://dqs3j2vp1ugo5"]
+[gd_scene load_steps=3 format=3 uid="uid://dqs3j2vp1ugo5"]
 
-[node name="ToggleLine" type="Node2D"]
+[ext_resource type="Script" uid="uid://cblopaseo7ysj" path="res://scripts/toggle_line.gd" id="1_ohmyq"]
+[ext_resource type="Script" uid="uid://dw0l1lg5y2tfn" path="res://scripts/draw_line.gd" id="1_p5ewx"]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="PuzzleLine" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rotation" type="Node2D" parent="." node_paths=PackedStringArray("PointA", "PointB")]
+z_index = 1
 rotation = 0.785398
-scale = Vector2(1.25, 1.25)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_p5ewx")
+PointA = NodePath("LinePoint1")
+PointB = NodePath("LinePoint2")
 
-[node name="Button" type="Button" parent="Node2D"]
+[node name="Button" type="Button" parent="Rotation" node_paths=PackedStringArray("PointA", "PointB")]
+self_modulate = Color(1, 1, 1, 0)
 offset_left = -20.5061
 offset_top = -20.5061
 offset_right = 20.4939
 offset_bottom = 20.4939
+action_mode = 0
 button_mask = 3
+script = ExtResource("1_ohmyq")
+PointA = NodePath("../LinePoint1")
+PointB = NodePath("../LinePoint2")
+
+[node name="LinePoint1" type="Node2D" parent="Rotation"]
+position = Vector2(-23.5702, 23.5702)
+scale = Vector2(1, 1)
+
+[node name="LinePoint2" type="Node2D" parent="Rotation"]
+position = Vector2(23.5703, -23.5703)
+scale = Vector2(1, 1)
+
+[node name="Line2D" type="Line2D" parent="Rotation"]
+unique_name_in_owner = true
+points = PackedVector2Array(-25, 25, 25, -25)
+width = 5.0
+
+[connection signal="gui_input" from="Rotation/Button" to="Rotation/Button" method="_on_Button_gui_input"]

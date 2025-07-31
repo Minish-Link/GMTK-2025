@@ -2,7 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://1jukk3ps8tln" path="res://textures/icon.svg" id="1_vmg1r"]
 
-[node name="PuzzleRule" type="Node2D"]
+[node name="PuzzleRule" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
