@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dqs3j2vp1ugo5"]
+
+[node name="ToggleLine" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+rotation = 0.785398
+scale = Vector2(1.25, 1.25)
+
+[node name="Button" type="Button" parent="Node2D"]
+offset_left = -20.5061
+offset_top = -20.5061
+offset_right = 20.4939
+offset_bottom = 20.4939
+button_mask = 3

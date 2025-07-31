@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8gx3eb654u5p"]
+
+[ext_resource type="Texture2D" uid="uid://1jukk3ps8tln" path="res://textures/icon.svg" id="1_xbar2"]
+
+[node name="PuzzleNode" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_xbar2")

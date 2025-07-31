@@ -12,7 +12,8 @@ config_version=5
 
 config/name="Loop Puzzles"
 config/tags=PackedStringArray("game_jam", "puzzle")
-config/features=PackedStringArray("4.4", "GL Compatibility")
+run/main_scene="uid://gqwiva4bf35d"
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://textures/icon.svg"
 
 [dotnet]
