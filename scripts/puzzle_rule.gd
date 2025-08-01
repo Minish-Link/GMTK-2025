@@ -19,7 +19,7 @@ func _set_grid_xy(_x: int, _y: int):
 	grid_x = _x
 	grid_y = _y
 
-func _set_rule(_rule: String, _color: String, _rule_number: int = 0):
+func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int = 0):
 	rule = _rule
 	rule_number = _rule_number
 	if (_color == "red"):

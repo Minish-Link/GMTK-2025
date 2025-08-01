@@ -24,14 +24,14 @@ func _on_Button_gui_input(event: InputEvent):
 					state = LineState.Red
 				else:
 					state = LineState.Blank
-				get_node("/root/MainScene/PuzzleGrid")._check_loops()
+				get_node("../../../../..")._check_loops()
 				get_parent()._draw()
 			MOUSE_BUTTON_RIGHT:
 				if state == LineState.Erased:
 					state = LineState.Blank
 				else:
 					state = LineState.Erased
-				get_node("/root/MainScene/PuzzleGrid")._check_loops()
+				get_node("../../../../..")._check_loops()
 				get_parent()._draw()
 
 func _get_state() -> int:

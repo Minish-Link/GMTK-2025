@@ -15,8 +15,14 @@ var bottom_boundary: int
 var array_width: int
 var array_height: int
 
+func _init() -> void:
+	pass
+
 func _enter_tree():
-	_create_grid(7,7)
+	_create_grid(2,2)
+
+func _accept_level_data(_data: Dictionary):
+	pass
 
 func _create_grid(_width: int, _height: int):
 	puzzle_width = _width
