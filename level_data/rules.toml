@@ -1,0 +1,7 @@
+[suits]
+heart = 0
+spade = 1
+club = 2
+diamond = 3
+
+[pips]

@@ -133,8 +133,6 @@ theme_override_constants/margin_right = 3
 layout_mode = 2
 size_flags_horizontal = 4
 text = "100"
-visible_characters = 3
-visible_ratio = 1.5
 
 [node name="MusicVolumeControlContainer" type="PanelContainer" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer"]
 layout_mode = 2

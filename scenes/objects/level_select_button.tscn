@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://3xtj1kbrex43"]
+
+[ext_resource type="Script" uid="uid://byftnrxmr1vvx" path="res://scenes/menus/level_select_button.gd" id="1_o7yn1"]
+
+[node name="LevelSelectButton" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o7yn1")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

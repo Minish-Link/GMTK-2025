@@ -1,0 +1,14 @@
+id = 0
+title = "Tutorial"
+width = 2
+height = 2
+num_of_color = 1
+
+[rules]
+suits = [
+	{variant = 2, color = "black", x = 0, y = 2},
+	{variant = 0, color = "red" x = 3, y = 1}
+]
+pips = [
+	{}
+]
