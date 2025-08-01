@@ -1,6 +1,5 @@
 class_name PuzzleGrid
 extends Control
-@warning_ignore("integer_division")
 
 @export var container: GridContainer
 
@@ -40,6 +39,7 @@ func _create_grid(_width: int, _height: int):
 			var line_node = puzzle_line.instantiate()
 			container.add_child(line_node)
 			puzzle_array[i] = line_node
+			@warning_ignore("integer_division")
 			if (i / columns) % 2 == 1:
 				(line_node.get_node("Rotation") as Node2D).rotate(deg_to_rad(90))
 		elif (i / ((_width * 2) + 1)) % 2 == 0:
@@ -48,28 +48,51 @@ func _create_grid(_width: int, _height: int):
 			puzzle_array[i] = vert_node
 		else:
 			var rule_node = puzzle_rule.instantiate()
+			#(rule_node as PuzzleRule)._set_rule("",0)
+			(rule_node as PuzzleRule)._set_grid_xy(0,0)
 			container.add_child(rule_node)
 			puzzle_array[i] = rule_node
 	get_node("Camera")._zoom_camera(_width, _height)
 
 func _check_loops() -> bool:
+	var _at_least_one_loop: bool = false
 	for x in range(0, array_width, 2):
 		for y in range(0,puzzle_array.size(),array_width * 2):
 			var _count: int = _get_neighboring_line_count(x,y)
+			if _count > 0:
+				_at_least_one_loop = true
 			if (_count != 2 and _count != 0):
 				print("Sploosh...")
 				return false
-	print("Kaboom!")
-	return true
+	if (_at_least_one_loop):
+		print("Kaboom!")
+		return true
+	else:
+		print("Sploosh...")
+		return false
 
-func _get_neighboring_line_count(_x: int, _y: int) -> int:
+func _get_neighboring_line_count(_x: int, _y: int, _color: int = 0) -> int:
 	var _count: int = 0
-	if (_x > 0 and puzzle_array[_x+_y-1].get_node("Rotation/Button")._get_state() == 2):
-		_count += 1
-	if (_x < right_boundary and puzzle_array[_x+_y+1].get_node("Rotation/Button")._get_state() == 2):
-		_count += 1
-	if (_y > 0 and puzzle_array[_x+_y - array_width].get_node("Rotation/Button")._get_state() == 2):
-		_count += 1
-	if (_y < bottom_boundary and puzzle_array[_x+_y + array_width].get_node("Rotation/Button")._get_state() == 2):
-		_count += 1
+	if (_color == 0):
+		if (_x > 0 and puzzle_array[_x+_y-1].get_node("Rotation/Button")._get_state() == 2):
+			_count += 1
+		if (_x < right_boundary and puzzle_array[_x+_y+1].get_node("Rotation/Button")._get_state() == 2):
+			_count += 1
+		if (_y > 0 and puzzle_array[_x+_y - array_width].get_node("Rotation/Button")._get_state() == 2):
+			_count += 1
+		if (_y < bottom_boundary and puzzle_array[_x+_y + array_width].get_node("Rotation/Button")._get_state() == 2):
+			_count += 1
+	else:
+		if (_x > 0 and puzzle_array[_x+_y-1].get_node("Rotation/Button")._get_state() == _color):
+			_count += 1
+		if (_x < right_boundary and puzzle_array[_x+_y+1].get_node("Rotation/Button")._get_state() == _color):
+			_count += 1
+		if (_y > 0 and puzzle_array[_x+_y - array_width].get_node("Rotation/Button")._get_state() == _color):
+			_count += 1
+		if (_y < bottom_boundary and puzzle_array[_x+_y + array_width].get_node("Rotation/Button")._get_state() == _color):
+			_count += 1
 	return _count
+
+func _get_region(_x: int, _y: int) -> Array:
+	var _region = Array()
+	return _region

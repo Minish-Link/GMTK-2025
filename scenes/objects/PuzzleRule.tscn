@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://cg4rspaeavpq7"]
 
-[ext_resource type="Texture2D" uid="uid://1jukk3ps8tln" path="res://textures/icon.svg" id="1_vmg1r"]
+[ext_resource type="Script" uid="uid://dnhi3o4u7eu1e" path="res://scripts/puzzle_rule.gd" id="1_vmg1r"]
 
 [node name="PuzzleRule" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_vmg1r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_vmg1r")

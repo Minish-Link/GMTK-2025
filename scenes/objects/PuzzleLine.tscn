@@ -34,11 +34,9 @@ PointB = NodePath("../LinePoint2")
 
 [node name="LinePoint1" type="Node2D" parent="Rotation"]
 position = Vector2(-23.5702, 23.5702)
-scale = Vector2(1, 1)
 
 [node name="LinePoint2" type="Node2D" parent="Rotation"]
 position = Vector2(23.5703, -23.5703)
-scale = Vector2(1, 1)
 
 [node name="Line2D" type="Line2D" parent="Rotation"]
 unique_name_in_owner = true
