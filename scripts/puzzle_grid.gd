@@ -15,10 +15,9 @@ var right_boundary: int
 var bottom_boundary: int
 var array_width: int
 var array_height: int
-var color_count: int
 
-func _init() -> void:
-	pass
+var color_count: int
+var current_color: int
 
 func _enter_tree():
 	_create_grid(5,5)
@@ -26,7 +25,26 @@ func _enter_tree():
 func _accept_level_data(_data: Dictionary):
 	pass
 
+func _input(event):
+	if event.is_action_pressed("swap"):
+		_swap_color()
+		
+
+func _swap_color():
+	if color_count > 1:
+		if current_color == 2:
+			print("Switching to Blue")
+			current_color = 3
+		else:
+			print("Switching to Red")
+			current_color = 2
+
+func _get_color() -> int:
+	return current_color
+
 func _create_grid(_width: int, _height: int):
+	color_count = 2
+	current_color = 2
 	puzzle_width = _width
 	puzzle_height = _height
 	right_boundary = puzzle_width * 2

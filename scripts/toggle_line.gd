@@ -17,8 +17,13 @@ func _on_Button_gui_input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
-				if state == LineState.Blank or state == LineState.Erased:
-					state = LineState.Red
+				var _new_color: int = (get_node("../../../../..") as PuzzleGrid)._get_color()
+				if state == LineState.Red and _new_color == LineState.Blue:
+					state = _new_color
+				elif state == LineState.Blue and _new_color == LineState.Red:
+					state = _new_color
+				elif state == LineState.Blank or state == LineState.Erased:
+					state = _new_color
 				else:
 					state = LineState.Blank
 				get_node("../../../../..")._check_loops()

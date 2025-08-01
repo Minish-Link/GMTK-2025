@@ -13,6 +13,6 @@ func _draw():
 		2:
 			%Line2D.default_color = Color.RED
 		3:
-			%Line2D.default_color = Color.BLUE
+			%Line2D.default_color = Color.DODGER_BLUE
 		_:
 			%Line2D.default_color = Color(1,1,1,0.5)
