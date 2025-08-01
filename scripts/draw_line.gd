@@ -9,10 +9,10 @@ func _draw():
 		0:
 			%Line2D.default_color = Color(0,0,0,0.1)
 		1:
-			%Line2D.default_color = Color(1,1,1,0.25)
+			%Line2D.default_color = Color(1,1,1,0.5)
 		2:
-			%Line2D.default_color = Color.FIREBRICK
+			%Line2D.default_color = Color.RED
 		3:
 			%Line2D.default_color = Color.BLUE
 		_:
-			%Line2D.default_color = Color(0,0,0,0.25)
+			%Line2D.default_color = Color(1,1,1,0.5)

@@ -1,9 +1,6 @@
 class_name PuzzleLine
 extends Button
 
-@export var PointA: Node2D
-@export var PointB: Node2D
-
 enum LineState {
 	Erased = 0b00,
 	Blank = 0b01,
@@ -20,7 +17,7 @@ func _on_Button_gui_input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
-				if state == LineState.Blank:
+				if state == LineState.Blank or state == LineState.Erased:
 					state = LineState.Red
 				else:
 					state = LineState.Blank
