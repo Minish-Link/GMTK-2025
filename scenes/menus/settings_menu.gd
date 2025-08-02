@@ -5,6 +5,10 @@ extends Control
 @onready var sfx_volume = %SFXVolumeSlider #$PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/SFXVolumeControlContainer/MarginContainer/SFXSlider
 @onready var color_blind_setting = %ColorBlindModeSelection #$PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/HSplitContainer2/AccessibilityControlsContainer/Button
 
+var main_bus_index = AudioServer.get_bus_index("Master")
+var music_bus_index = AudioServer.get_bus_index("Music")
+var sfx_bus_index = AudioServer.get_bus_index("SFX")
+
 var settings_data: Dictionary = TOML.parse("res://player_data/settings.toml")
 var settings_changed: bool = false
 
@@ -38,12 +42,27 @@ func _on_button_item_selected(index: int) -> void:
 
 func _on_main_volume_slider_value_changed(value: float) -> void:
 	settings_changed = true
+	AudioServer.set_bus_volume_linear(main_bus_index,value)
 	settings_data["volume"]["main"] = value
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	settings_changed = true
+	AudioServer.set_bus_volume_linear(music_bus_index,value)
 	settings_data["volume"]["music"] = value
 
 func _on_sfx_slider_value_changed(value: float) -> void:
 	settings_changed = true
+	AudioServer.set_bus_volume_linear(sfx_bus_index,value)
 	settings_data["volume"]["sfx"] = value
+
+
+func _on_reset_button_pressed() -> void:
+	settings_data["volume"]["main"] = 30
+	settings_data["volume"]["music"] = 30
+	settings_data["volume"]["sfx"] = 30
+	settings_data["accessibility"]["color_blind"] = 0
+	main_volume.value = settings_data["volume"]["main"]
+	music_volume.value = settings_data["volume"]["music"]
+	sfx_volume.value = settings_data["volume"]["sfx"]
+	color_blind_setting.select(settings_data["accessibility"]["color_blind"])
+	settings_changed = true

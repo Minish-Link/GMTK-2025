@@ -115,6 +115,7 @@ dragger_visibility = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+step = 0.1
 value = 30.0
 rounded = true
 tick_count = 11
@@ -147,6 +148,7 @@ theme_override_constants/margin_bottom = 10
 [node name="MusicVolumeSlider" type="HSlider" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MusicVolumeControlContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+step = 0.1
 value = 30.0
 rounded = true
 tick_count = 11
@@ -164,6 +166,7 @@ theme_override_constants/margin_bottom = 10
 [node name="SFXVolumeSlider" type="HSlider" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/SFXVolumeControlContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+step = 0.1
 value = 30.0
 rounded = true
 tick_count = 11
@@ -204,6 +207,11 @@ popup/item_2/id = 1
 popup/item_3/text = "Tritanpoia"
 popup/item_3/id = 2
 
+[node name="ResetButton" type="Button" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Reset to Defaults"
+
 [node name="BackButton" type="Button" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -216,4 +224,5 @@ text = "Back to Main Menu"
 [connection signal="drag_ended" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/SFXVolumeControlContainer/MarginContainer/SFXVolumeSlider" to="." method="_on_sfx_slider_drag_ended"]
 [connection signal="value_changed" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/SFXVolumeControlContainer/MarginContainer/SFXVolumeSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="item_selected" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/HSplitContainer2/AccessibilityControlsContainer/ColorBlindModeSelection" to="." method="_on_button_item_selected"]
+[connection signal="pressed" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/BackButton" to="." method="_on_back_button_pressed"]
