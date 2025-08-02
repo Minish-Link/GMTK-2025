@@ -1,13 +1,28 @@
+#class_name LevelSelectButton
 extends Button
 
-var level_id: int = 0
+@export var level_path: String = "res://level_data/testing_level.json"
 
-var level_data: Dictionary = {}
+var level_data: JSON = JSON.new()
+
+func _ready() -> void:
+	#print("Trying to Connect")
+	get_node("../../../LevelSelectMenu").connect("LevelComplete", _is_completed)
 
 func _on_pressed() -> void:
-	level_data = TOML.parse("res://level_data/level" + str(level_id) + ".toml")
 	var puzzle_scene = load("res://scenes/levels/main_puzzle_scene.tscn").instantiate()
-	puzzle_scene._accept_level_data(level_data)
-	get_node("../../LevelCanvasLayer").add_child(puzzle_scene)
-	process_mode = Node.PROCESS_MODE_DISABLED
-	
+	var error = level_data.parse(FileAccess.get_file_as_string(level_path))
+	if error == OK:
+		#color_count = 2
+		#_create_grid(7,7)
+		puzzle_scene.get_node("PuzzleGrid")._accept_level_data(level_data.data)
+		get_parent().hide()
+		get_node("../../LevelCanvasLayer").add_child(puzzle_scene)
+		#process_mode = Node.PROCESS_MODE_DISABLED
+	else:
+		print("Couldn't load JSON")
+
+func _is_completed(path: String) -> void:
+	#print("Entered _is_completed")
+	if path == level_path:
+		set("theme_override_colors/font_color",Color.GREEN)

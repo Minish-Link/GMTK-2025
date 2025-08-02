@@ -1,14 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://gqwiva4bf35d"]
+[gd_scene load_steps=3 format=3 uid="uid://gqwiva4bf35d"]
 
 [ext_resource type="PackedScene" uid="uid://tv2h3m2ukxst" path="res://scenes/objects/PuzzleGrid.tscn" id="1_2mtb0"]
 
-[node name="MainScene" type="Control"]
-layout_mode = 3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mtb0"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="MainScene" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2mtb0")
 
 [node name="PuzzleGrid" parent="." instance=ExtResource("1_2mtb0")]
-layout_mode = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
