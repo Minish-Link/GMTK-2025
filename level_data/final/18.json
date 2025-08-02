@@ -1,0 +1,20 @@
+{
+	"name": "Crossed Out",
+	"id": 18,
+	"prev_level": "final/17",
+	"next_level": "final/19",
+	"width": 5,
+	"height": 5,
+	"color_amount": 2,
+	"rules": [
+		{"x": 1, "y": 1, "type": "suit", "color": "blue", "number": 0},
+		{"x": 3, "y": 1, "type": "suit", "color": "red", "number": 1},
+		{"x": 1, "y": 3, "type": "suit", "color": "red", "number": 2},
+		{"x": 3, "y": 3, "type": "suit", "color": "blue", "number": 3},
+		{"x": 2, "y": 2, "type": "pips", "color": "black", "number": 0},
+		{"x": 2, "y": 0, "type": "area", "color": "blue", "number": 4},
+		{"x": 0, "y": 2, "type": "area", "color": "red", "number": 5},
+		{"x": 4, "y": 2, "type": "area", "color": "blue", "number": 5},
+		{"x": 2, "y": 4, "type": "area", "color": "black", "number": 6},
+	]
+}

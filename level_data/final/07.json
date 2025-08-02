@@ -1,0 +1,16 @@
+{
+	"name": "Suits and Ties",
+	"id": 7,
+	"prev_level": "final/06",
+	"next_level": "final/08",
+	"width": 4,
+	"height": 2,
+	"color_amount": 1,
+	"rules": [
+		{"x": 0, "y": 0, "type": "suit", "color": "black", "number": 0},
+		{"x": 0, "y": 1, "type": "suit", "color": "black", "number": 1},
+		{"x": 3, "y": 0, "type": "suit", "color": "black", "number": 2},
+		{"x": 3, "y": 1, "type": "suit", "color": "black", "number": 3}
+	],
+	"description": "Card Suit symbols must not occupy the same region as different suits.\ne.g. A heart can occupy a region with any number of other hearts, but it may not occupy a region with any spades, clubs, or diamonds."
+}

@@ -1,0 +1,17 @@
+{
+	"name": "Triple Threat",
+	"id": 6,
+	"prev_level": "final/05",
+	"next_level": "final/07",
+	"width": 3,
+	"height": 3,
+	"color_amount": 1,
+	"rules": [
+		{"x": 0, "y": 0, "type": "pips", "color": "black", "number": 3},
+		{"x": 2, "y": 0, "type": "pips", "color": "black", "number": 3},
+		{"x": 0, "y": 2, "type": "pips", "color": "black", "number": 3},
+		{"x": 2, "y": 2, "type": "pips", "color": "black", "number": 3},
+		{"x": 1, "y": 1, "type": "area", "color": "black", "number": 3},
+	],
+	"description": "You are allowed to draw more than one loop."
+}

@@ -7,7 +7,7 @@ var level_data: JSON = JSON.new()
 
 func _ready() -> void:
 	#print("Trying to Connect")
-	get_node("../../../LevelSelectMenu").connect("LevelComplete", _is_completed)
+	get_node("../../../../LevelSelectMenu").connect("LevelComplete", _is_completed)
 
 func _on_pressed() -> void:
 	var puzzle_scene = load("res://scenes/levels/main_puzzle_scene.tscn").instantiate()
@@ -17,7 +17,7 @@ func _on_pressed() -> void:
 		#_create_grid(7,7)
 		puzzle_scene.get_node("PuzzleGrid")._accept_level_data(level_data.data)
 		get_parent().hide()
-		get_node("../../LevelCanvasLayer").add_child(puzzle_scene)
+		get_node("../../../LevelCanvasLayer").add_child(puzzle_scene)
 		#process_mode = Node.PROCESS_MODE_DISABLED
 	else:
 		print("Couldn't load JSON")

@@ -1,0 +1,16 @@
+{
+	"name": "Perfect Number",
+	"id": 5,
+	"prev_level": "final/04",
+	"next_level": "final/06",
+	"width": 3,
+	"height": 3,
+	"color_amount": 1,
+	"rules": [
+		{"x": 0, "y": 0, "type": "pips", "color": "black", "number": 1},
+		{"x": 1, "y": 0, "type": "pips", "color": "black", "number": 3},
+		{"x": 2, "y": 0, "type": "pips", "color": "black", "number": 2},
+		{"x": 1, "y": 2, "type": "area", "color": "black", "number": 6}
+	],
+	"description": ""
+}

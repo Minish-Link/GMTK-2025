@@ -1,8 +1,10 @@
 {
-	"id": 1,
+	"name": "Off Suit",
+	"id": 12,
+	"prev_level": "final/11",
+	"next_level": "final/12",
 	"width": 2,
 	"height": 2,
-	"title": "Off-Suit",
 	"color_amount": 2,
 	"rules": [
 		{"x": 0, "y": 0, "type": "suit", "number": 0, "color": "black"},

@@ -15,54 +15,6 @@ script = ExtResource("1_v6kjm")
 
 [node name="LevelSelectCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TestingLevelButton" parent="LevelSelectCanvasLayer" instance=ExtResource("2_dm02g")]
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 88.0
-offset_top = 56.0
-offset_right = 197.0
-offset_bottom = 87.0
-grow_horizontal = 1
-grow_vertical = 1
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Testing Level"
-
-[node name="OffSuitsLevelButton" parent="LevelSelectCanvasLayer" instance=ExtResource("2_dm02g")]
-offset_left = -465.0
-offset_top = -173.0
-offset_right = -397.0
-offset_bottom = -142.0
-text = "Off-Suit"
-level_path = "res://level_data/all_suits.json"
-
-[node name="BoxedIn1LevelButton" parent="LevelSelectCanvasLayer" instance=ExtResource("2_dm02g")]
-offset_left = -102.0
-offset_top = -263.0
-offset_right = -13.0
-offset_bottom = -232.0
-text = "Boxed In 1"
-level_path = "res://level_data/boxed_in_1.json"
-
-[node name="BoxedIn2LevelButton" parent="LevelSelectCanvasLayer" instance=ExtResource("2_dm02g")]
-offset_left = 25.0
-offset_top = -263.0
-offset_right = 114.0
-offset_bottom = -232.0
-text = "Boxed In 2"
-level_path = "res://level_data/boxed_in_2.json"
-
-[node name="BoxedIn3LevelButton" parent="LevelSelectCanvasLayer" instance=ExtResource("2_dm02g")]
-offset_left = 160.0
-offset_top = -261.0
-offset_right = 249.0
-offset_bottom = -230.0
-text = "Boxed In 3"
-level_path = "res://level_data/boxed_in_3.json"
-
 [node name="BackButton" type="Button" parent="LevelSelectCanvasLayer"]
 offset_left = 497.0
 offset_top = 607.0
@@ -71,5 +23,158 @@ offset_bottom = 638.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Back to Main Menu"
+
+[node name="LevelGrid" type="GridContainer" parent="LevelSelectCanvasLayer"]
+offset_left = 362.0
+offset_top = 254.0
+offset_right = 603.0
+offset_bottom = 307.0
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 5
+
+[node name="01Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "01"
+level_path = "res://level_data/final/01.json"
+
+[node name="02Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "02"
+level_path = "res://level_data/final/02.json"
+
+[node name="03Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "03"
+level_path = "res://level_data/final/03.json"
+
+[node name="04Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "04"
+level_path = "res://level_data/final/04.json"
+
+[node name="05Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "05"
+level_path = "res://level_data/final/05.json"
+
+[node name="06Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "06"
+level_path = "res://level_data/final/06.json"
+
+[node name="07Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "07"
+level_path = "res://level_data/final/07.json"
+
+[node name="08Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "08"
+level_path = "res://level_data/final/08.json"
+
+[node name="09Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "09"
+level_path = "res://level_data/final/09.json"
+
+[node name="10Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "10"
+level_path = "res://level_data/final/10.json"
+
+[node name="11Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "11"
+level_path = "res://level_data/final/11.json"
+
+[node name="12Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "12"
+level_path = "res://level_data/final/12.json"
+
+[node name="13Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "13"
+level_path = "res://level_data/final/13.json"
+
+[node name="14Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "14"
+level_path = "res://level_data/final/14.json"
+
+[node name="15Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "15"
+level_path = "res://level_data/final/15.json"
+
+[node name="16Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "16"
+level_path = "res://level_data/final/16.json"
+
+[node name="17Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "17"
+level_path = "res://level_data/final/17.json"
+
+[node name="18Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "18"
+level_path = "res://level_data/final/18.json"
 
 [connection signal="pressed" from="LevelSelectCanvasLayer/BackButton" to="." method="_on_back_button_pressed"]

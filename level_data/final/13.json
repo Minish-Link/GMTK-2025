@@ -1,0 +1,14 @@
+{
+	"name": "Cubed",
+	"id": 13,
+	"prev_level": "final/12",
+	"next_level": "final/14",
+	"width": 3,
+	"height": 3,
+	"color_amount": 2,
+	"rules": [
+		{"x": 0, "y": 0, "type": "area", "color": "black", "number": 3},
+		{"x": 1, "y": 1, "type": "pips", "color": "black", "number": 4},
+		{"x": 2, "y": 2, "type": "area", "color": "black", "number": 3},
+	]
+}

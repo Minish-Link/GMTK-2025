@@ -1,0 +1,13 @@
+{
+	"name": "Saturn",
+	"id": 17,
+	"prev_level": "final/16",
+	"next_level": "final/18",
+	"width": 5,
+	"height": 5,
+	"color_amount": 2,
+	"rules": [
+		{"x": 2, "y": 1, "type": "area", "color": "blue", "number": 24},
+		{"x": 2, "y": 2, "type": "area", "color": "red", "number": 9},
+	]
+}

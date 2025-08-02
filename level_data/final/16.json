@@ -1,0 +1,15 @@
+{
+	"name": "Neopolitan Ice Cream",
+	"id": 16,
+	"prev_level": "final/15",
+	"next_level": "final/17",
+	"width": 3,
+	"height": 3,
+	"color_amount": 2,
+	"rules": [
+		{"x": 0, "y": 0, "type": "area", "color": "red", "number": 3},
+		{"x": 1, "y": 1, "type": "area", "color": "black", "number": 3},
+		{"x": 2, "y": 2, "type": "area", "color": "blue", "number": 3},
+	],
+	"description": "If a symbol is red, Its rule will be checked as though there are no blue lines.\nLikewise, a blue symbol will ignore red lines."
+}

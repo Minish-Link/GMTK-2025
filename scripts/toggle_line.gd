@@ -28,7 +28,7 @@ func _on_Button_gui_input(event: InputEvent):
 				elif state == LineState.Blank or state == LineState.Erased:
 					state = _new_color as LineState
 				else:
-					state = LineState.Erased
+					state = LineState.Blank
 				get_node("../../../../..")._check_loops()
 				get_parent()._draw()
 			MOUSE_BUTTON_RIGHT:

@@ -2,6 +2,8 @@ class_name PuzzleGrid
 extends Control
 
 @export var container: GridContainer
+@export var name_text: RichTextLabel
+@export var description_text: RichTextLabel
 
 var puzzle_array: Array
 var rule_array: Array
@@ -39,21 +41,13 @@ func _swap_color():
 func _get_color() -> int:
 	return current_color
 
-func _enter_tree():
-	#_accept_level_data(TOML.parse("res://level_data/testing_level.toml"))
-	#var _json = JSON.new()
-	#var _error = _json.parse(FileAccess.get_file_as_string("res://level_data/pips_and_regions_1.json"))
-	#if _error == OK:
-		#color_count = 2
-		#_create_grid(7,7)
-	#	_accept_level_data(_json.data)
-	#else:
-	#	print("Couldn't load JSON")
-	#_create_grid(5,5)
-	pass
-
 func _accept_level_data(_data: Dictionary):
 	print(_data)
+	name_text.text = _data["name"]
+	if ("description" in _data):
+		description_text.text = _data["description"]
+	else:
+		description_text.text = ""
 	color_count = _data["color_amount"]
 	_create_grid(_data["width"], _data["height"])
 	for _rule in _data["rules"]:

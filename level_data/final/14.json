@@ -1,0 +1,21 @@
+{
+	"name": "Card Box",
+	"id": 14,
+	"prev_level": "final/13",
+	"next_level": "final/15",
+	"width": 4,
+	"height": 4,
+	"color_amount": 2,
+	"rules": [
+		{"x": 1, "y": 0, "type": "area", "color": "black", "number": 2},
+		{"x": 2, "y": 1, "type": "area", "color": "black", "number": 3},
+		{"x": 3, "y": 2, "type": "area", "color": "black", "number": 4},
+		{"x": 0, "y": 1, "type": "pips", "color": "black", "number": 4},
+		{"x": 1, "y": 2, "type": "pips", "color": "black", "number": 4},
+		{"x": 2, "y": 0, "type": "suit", "color": "black", "number": 2},
+		{"x": 3, "y": 1, "type": "suit", "color": "black", "number": 3},
+		{"x": 2, "y": 2, "type": "suit", "color": "black", "number": 1},
+		{"x": 1, "y": 3, "type": "suit", "color": "black", "number": 0}
+	],
+	"description": "If you know that a line must be drawn somewhere, but you aren't sure what color it should be, marking it with a pink line is a handy way to keep track of it."
+}

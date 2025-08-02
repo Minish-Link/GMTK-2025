@@ -1,0 +1,20 @@
+{
+	"name": "Eight of Clubs",
+	"id": 8,
+	"prev_level": "final/07",
+	"next_level": "final/09",
+	"width": 4,
+	"height": 4,
+	"color_amount": 1,
+	"rules": [
+		{"x": 0, "y": 0, "type": "suit", "color": "black", "number": 0},
+		{"x": 3, "y": 0, "type": "suit", "color": "black", "number": 3},
+		{"x": 0, "y": 3, "type": "suit", "color": "black", "number": 3},
+		{"x": 3, "y": 3, "type": "suit", "color": "black", "number": 0},
+		{"x": 1, "y": 2, "type": "suit", "color": "black", "number": 2},
+		{"x": 2, "y": 1, "type": "area", "color": "black", "number": 8},
+		{"x": 3, "y": 1, "type": "pips", "color": "black", "number": 3},
+		{"x": 0, "y": 2, "type": "pips", "color": "black", "number": 3}
+	],
+	"description": ""
+}

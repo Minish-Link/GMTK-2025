@@ -1,0 +1,16 @@
+{
+	"name": "Four Corners",
+	"id": 2,
+	"prev_level": "final/01",
+	"next_level": "final/03",
+	"width": 3,
+	"height": 3,
+	"color_amount": 1,
+	"rules": [
+		{"x": 0, "y": 0, "type": "pips", "color": "black", "number": 2},
+		{"x": 2, "y": 0, "type": "pips", "color": "black", "number": 2},
+		{"x": 0, "y": 2, "type": "pips", "color": "black", "number": 2},
+		{"x": 2, "y": 2, "type": "pips", "color": "black", "number": 2}
+	],
+	"description": "Dice symbols require a number of lines equal to the number of pips on it to be drawn adjacent to it."
+}
