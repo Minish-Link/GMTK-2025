@@ -42,8 +42,10 @@ func _get_color() -> int:
 func _enter_tree():
 	#_accept_level_data(TOML.parse("res://level_data/testing_level.toml"))
 	var _json = JSON.new()
-	var _error = _json.parse(FileAccess.get_file_as_string("res://level_data/testing_level.json"))
+	var _error = _json.parse(FileAccess.get_file_as_string("res://level_data/pips_and_regions_1.json"))
 	if _error == OK:
+		#color_count = 2
+		#_create_grid(7,7)
 		_accept_level_data(_json.data)
 	else:
 		print("Couldn't load JSON")

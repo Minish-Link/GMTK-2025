@@ -25,7 +25,7 @@ offset_top = -9.0
 offset_right = 24.0
 offset_bottom = 9.0
 action_mode = 0
-button_mask = 3
+button_mask = 7
 script = ExtResource("1_ohmyq")
 
 [node name="Line2D" type="Line2D" parent="Rotation"]
