@@ -19,16 +19,13 @@ var array_height: int
 var color_count: int
 var current_color: int
 
-func _enter_tree():
-	_create_grid(5,5)
+var next_level_id: int
 
-func _accept_level_data(_data: Dictionary):
-	pass
+
 
 func _input(event):
 	if event.is_action_pressed("swap"):
 		_swap_color()
-		
 
 func _swap_color():
 	if color_count > 1:
@@ -42,8 +39,25 @@ func _swap_color():
 func _get_color() -> int:
 	return current_color
 
+func _enter_tree():
+	#_accept_level_data(TOML.parse("res://level_data/testing_level.toml"))
+	var _json = JSON.new()
+	var _error = _json.parse(FileAccess.get_file_as_string("res://level_data/testing_level.json"))
+	if _error == OK:
+		_accept_level_data(_json.data)
+	else:
+		print("Couldn't load JSON")
+	#_create_grid(5,5)
+
+func _accept_level_data(_data: Dictionary):
+	print(_data)
+	color_count = _data["color_amount"]
+	_create_grid(_data["width"], _data["height"])
+	for _rule in _data["rules"]:
+		(rule_array[_rule["x"] + (puzzle_width * _rule["y"])] as PuzzleRule)._set_rule(_rule["type"], _rule["color"], _rule["number"])
+
+
 func _create_grid(_width: int, _height: int):
-	color_count = 2
 	current_color = 2
 	puzzle_width = _width
 	puzzle_height = _height
@@ -75,7 +89,7 @@ func _create_grid(_width: int, _height: int):
 			puzzle_array[i] = vert_node
 		else:
 			var rule_node = puzzle_rule.instantiate()
-			(rule_node as PuzzleRule)._set_grid_xy(i % columns, i / columns)
+			(rule_node as PuzzleRule)._set_grid_xy((i % columns - 1) / 2, (i / columns - 1) / 2)
 			container.add_child(rule_node)
 			puzzle_array[i] = rule_node
 			rule_array[_rule_count] = rule_node

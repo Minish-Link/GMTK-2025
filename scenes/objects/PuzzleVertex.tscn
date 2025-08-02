@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c8gx3eb654u5p"]
 
-[ext_resource type="Texture2D" uid="uid://1jukk3ps8tln" path="res://textures/icon.svg" id="1_xbar2"]
+[ext_resource type="Texture2D" uid="uid://ce7hswm1vdila" path="res://textures/timer_100.png" id="1_xbar2"]
 
 [node name="PuzzleVertex" type="Control"]
 layout_mode = 3
@@ -13,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
 z_index = 2
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_xbar2")

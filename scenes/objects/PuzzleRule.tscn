@@ -1,11 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://cg4rspaeavpq7"]
+[gd_scene load_steps=3 format=3 uid="uid://cg4rspaeavpq7"]
 
 [ext_resource type="Script" uid="uid://dnhi3o4u7eu1e" path="res://scripts/puzzle_rule.gd" id="1_vmg1r"]
+[ext_resource type="FontFile" uid="uid://b8bn3rlf6stxr" path="res://fonts/ChunkFive-Regular.otf" id="2_8s5jd"]
 
-[node name="PuzzleRule" type="Control"]
+[node name="PuzzleRule" type="Control" node_paths=PackedStringArray("sprite", "text")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vmg1r")
+sprite = NodePath("Sprite2D")
+text = NodePath("RichTextLabel")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.75, 0.75)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme_override_fonts/normal_font = ExtResource("2_8s5jd")
+theme_override_font_sizes/normal_font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
