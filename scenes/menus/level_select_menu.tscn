@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1ndctqe31qkx"]
+[gd_scene load_steps=3 format=3 uid="uid://d1ndctqe31qkx"]
 
 [ext_resource type="Script" uid="uid://c6iyhhgbch1oh" path="res://scenes/menus/level_select_menu.gd" id="1_v6kjm"]
 [ext_resource type="PackedScene" uid="uid://3xtj1kbrex43" path="res://scenes/objects/level_select_button.tscn" id="2_dm02g"]
-[ext_resource type="AudioStream" uid="uid://bakyfgw5r8p2h" path="res://audio/music/GMTK2025_alt.mp3" id="3_tbwtj"]
 
 [node name="LevelSelectMenu" type="PanelContainer"]
 anchors_preset = 15
@@ -185,10 +184,5 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "19"
 level_path = "res://level_data/final/19.json"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_tbwtj")
-autoplay = true
-parameters/looping = true
 
 [connection signal="pressed" from="LevelSelectCanvasLayer/BackButton" to="." method="_on_back_button_pressed"]

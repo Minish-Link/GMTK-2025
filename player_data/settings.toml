@@ -1,8 +1,8 @@
 
+[volume]
+  main = 0.3
+  music = 0.3
+  sfx = 0.3
+
 [accessibility]
   color_blind = 0
-
-[volume]
-  sfx = 30
-  music = 30.0
-  main = 30

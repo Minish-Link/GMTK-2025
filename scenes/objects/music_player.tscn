@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://htej8eve7fcs"]
+
+[ext_resource type="AudioStream" uid="uid://bakyfgw5r8p2h" path="res://audio/music/GMTK2025_alt.mp3" id="1_a10eh"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_a10eh")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true

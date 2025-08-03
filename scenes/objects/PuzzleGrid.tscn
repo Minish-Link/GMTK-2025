@@ -250,9 +250,11 @@ Level Select"
 [node name="LineSFXPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_6b2c1")
+bus = &"SFX"
 
 [node name="VictoryJinglePlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+bus = &"SFX"
 
 [node name="Particles" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
