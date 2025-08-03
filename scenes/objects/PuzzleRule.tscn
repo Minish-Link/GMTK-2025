@@ -3,17 +3,17 @@
 [ext_resource type="Script" uid="uid://dnhi3o4u7eu1e" path="res://scripts/puzzle_rule.gd" id="1_vmg1r"]
 [ext_resource type="FontFile" uid="uid://b8bn3rlf6stxr" path="res://fonts/ChunkFive-Regular.otf" id="2_8s5jd"]
 
-[node name="PuzzleRule" type="Control" node_paths=PackedStringArray("sprite", "text")]
+[node name="PuzzleRule" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vmg1r")
-sprite = NodePath("Sprite2D")
-text = NodePath("RichTextLabel")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 scale = Vector2(0.75, 0.75)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="TextLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

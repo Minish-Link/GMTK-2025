@@ -3,9 +3,8 @@
 	"id": 19,
 	"prev_level": "final/18",
 	"next_level": "final/20",
-	"width": 7,
-	"height": 7,
+	"width": 4,
+	"height": 4,
 	"color_amount": 2,
-	"rules": [],
-	"description": ""
+	"rules": []
 }

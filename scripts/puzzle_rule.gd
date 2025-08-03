@@ -6,8 +6,8 @@ var grid_y: int
 var rule: String
 var rule_number: int
 var color_id: int
-@export var sprite: Sprite2D
-@export var text: RichTextLabel
+
+var colorblind: int
 
 enum ColorID {
 	Black = 0,
@@ -23,6 +23,9 @@ enum SuitID {
 	Diamond = 3
 }
 
+func _set_colorblind(_setting: int):
+	colorblind = _setting
+
 func _set_grid_xy(_x: int, _y: int):
 	grid_x = _x
 	grid_y = _y
@@ -33,15 +36,15 @@ func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int =
 	if rule == "pips":
 		match rule_number:
 			0:
-				sprite.texture = load("res://textures/dice_empty.svg")
+				%Sprite.texture = load("res://textures/dice_empty.svg")
 			1:
-				sprite.texture = load("res://textures/dice_1.svg")
+				%Sprite.texture = load("res://textures/dice_1.svg")
 			2:
-				sprite.texture = load("res://textures/dice_2.svg")
+				%Sprite.texture = load("res://textures/dice_2.svg")
 			3:
-				sprite.texture = load("res://textures/dice_3.svg")
+				%Sprite.texture = load("res://textures/dice_3.svg")
 			4:
-				sprite.texture = load("res://textures/dice_4.svg")
+				%Sprite.texture = load("res://textures/dice_4.svg")
 			_:
 				print("pip rule invalid")
 				rule = ""
@@ -49,35 +52,43 @@ func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int =
 	elif rule == "suit":
 		match rule_number:
 			0:
-				sprite.texture = load("res://textures/suit_hearts.svg")
+				%Sprite.texture = load("res://textures/suit_hearts.svg")
 			1:
-				sprite.texture = load("res://textures/suit_spades.svg")
+				%Sprite.texture = load("res://textures/suit_spades.svg")
 			2:
-				sprite.texture = load("res://textures/suit_clubs.svg")
+				%Sprite.texture = load("res://textures/suit_clubs.svg")
 			3:
-				sprite.texture = load("res://textures/suit_diamonds.svg")
+				%Sprite.texture = load("res://textures/suit_diamonds.svg")
 			_:
 				print("suit rule invalid")
 				rule = ""
 				rule_number = 0
 	elif rule == "area":
-		text.text = str(rule_number)
+		%TextLabel.text = str(rule_number)
 			
 	if (_color == "red"):
-		sprite.modulate = Color.RED
-		text.modulate = Color.RED
+		%Sprite.modulate = Color.RED
+		%TextLabel.modulate = Color.RED
 		color_id = ColorID.Red
 	elif (_color == "blue"):
-		sprite.modulate = Color.DODGER_BLUE
-		text.modulate = Color.DODGER_BLUE
+		%Sprite.modulate = Color.DODGER_BLUE
+		%TextLabel.modulate = Color.DODGER_BLUE
 		color_id = ColorID.Blue
 	elif (_color == "purple"):
-		sprite.modulate = Color.PURPLE
-		text.modulate = Color.PURPLE
 		color_id = ColorID.Purple
+		print(colorblind)
+		if colorblind == 0:
+			%Sprite.modulate = Color.PURPLE
+			%TextLabel.modulate = Color.PURPLE
+		elif colorblind == 1:
+			%Sprite.modulate = Color(0.5, 0.8, 0.5, 1.0)
+			%TextLabel.modulate = Color(0.5, 0.8, 0.5, 1.0)
+		else:
+			%Sprite.modulate = Color(0.8, 0.8, 0.0, 1.0)
+			%TextLabel.modulate = Color(0.8, 0.8, 0.0, 1.0)
 	else:
-		sprite.modulate = Color.BLACK
-		text.modulate = Color.BLACK
+		%Sprite.modulate = Color.BLACK
+		%TextLabel.modulate = Color.BLACK
 		color_id = ColorID.Black
 
 func _get_suit() -> int:

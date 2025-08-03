@@ -14,5 +14,5 @@
 		{"x": 1, "y": 0, "type": "pips", "color": "black", "number": 1},
 		{"x": 1, "y": 2, "type": "pips", "color": "black", "number": 3}
 	],
-	"description": "You can right click on line segments to erase them.\nYou can always bring erased lines back by clicking them again.\n\nYou can also middle click on lines to draw pink hint lines.\nPink lines don't count when checking your solution, so they can be a helpful tool to deduce where lines need to be drawn."
+	"description": "You can right click on line segments to erase them.\nYou can always bring erased lines back by clicking them again.\n\nYou can also middle click on lines to draw black lines.\nBlack lines don't count when checking your solution, so they can be a helpful tool to deduce where lines need to be drawn."
 }

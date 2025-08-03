@@ -17,5 +17,5 @@
 		{"x": 2, "y": 2, "type": "suit", "color": "black", "number": 1},
 		{"x": 1, "y": 3, "type": "suit", "color": "black", "number": 0}
 	],
-	"description": "If you know that a line must be drawn somewhere, but you aren't sure what color it should be, marking it with a pink line is a handy way to keep track of it."
+	"description": "If you know that a line must be drawn somewhere, but you aren't sure what color it should be, marking it with a black line is a handy way to keep track of it."
 }

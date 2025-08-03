@@ -33,6 +33,10 @@ var prev_level: String
 
 var played_victory: bool = false
 
+var colorblind_setting
+
+func _init() -> void:
+	colorblind_setting = TOML.parse("res://player_data/settings.toml")["accessibility"]["color_blind"]
 
 func _input(event):
 	if event.is_action_pressed("swap"):
@@ -114,6 +118,7 @@ func _create_grid(_width: int, _height: int):
 			puzzle_array[i] = vert_node
 		else:
 			var rule_node = puzzle_rule.instantiate()
+			(rule_node as PuzzleRule)._set_colorblind(colorblind_setting)
 			(rule_node as PuzzleRule)._set_grid_xy((i % columns - 1) / 2, (i / columns - 1) / 2)
 			container.add_child(rule_node)
 			puzzle_array[i] = rule_node
@@ -123,7 +128,6 @@ func _create_grid(_width: int, _height: int):
 	var zoom_y = 1.0 / (puzzle_height / 5.0)
 	var final_zoom = min(zoom_x, zoom_y) * 0.9
 	%GridZoom.scale = (Vector2(final_zoom, final_zoom))
-	#get_node("Camera")._zoom_camera(_width, _height)
 
 func _check_loops() -> bool:
 	var _at_least_one_loop: bool = false
