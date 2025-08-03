@@ -1,8 +1,8 @@
 {
-	"name": "Suits and Ties",
+	"name": "Level 7: Suits and Ties",
 	"id": 7,
-	"prev_level": "final/06",
-	"next_level": "final/08",
+	"prev_level": "final/6",
+	"next_level": "final/8",
 	"width": 4,
 	"height": 2,
 	"color_amount": 1,

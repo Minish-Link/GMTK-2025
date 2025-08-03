@@ -4,6 +4,13 @@ extends Control
 @export var container: GridContainer
 @export var name_text: RichTextLabel
 @export var description_text: RichTextLabel
+@export var next_level_button: ColorRect
+@export var prev_level_button: ColorRect
+
+var sfx_success = preload("res://audio/music/jingles-pizzicato_08.ogg")
+var sfx_failure = preload("res://audio/music/jingles-pizzicato_05.ogg")
+
+var puzzle_id: int
 
 var puzzle_array: Array
 var rule_array: Array
@@ -21,9 +28,8 @@ var array_height: int
 var color_count: int
 var current_color: int
 
-var next_level_id: int
-
-
+var next_level: String
+var prev_level: String
 
 func _input(event):
 	if event.is_action_pressed("swap"):
@@ -42,12 +48,31 @@ func _get_color() -> int:
 	return current_color
 
 func _accept_level_data(_data: Dictionary):
+	for _node in puzzle_array:
+		_node.queue_free()
+	puzzle_array.clear()
+	rule_array.clear()
+	
 	print(_data)
 	name_text.text = _data["name"]
+	puzzle_id = _data["id"]
+	
 	if ("description" in _data):
 		description_text.text = _data["description"]
 	else:
 		description_text.text = ""
+	
+	prev_level = _data["prev_level"]
+	next_level = _data["next_level"]
+	if _data["prev_level"] != "":
+		prev_level_button.visible = true
+	else:
+		prev_level_button.visible = false
+	if _data["next_level"] != "":
+		next_level_button.visible = true
+	else:
+		next_level_button.visible = false
+		
 	color_count = _data["color_amount"]
 	_create_grid(_data["width"], _data["height"])
 	for _rule in _data["rules"]:
@@ -195,3 +220,44 @@ func _connect_cell(_region: Array, _array_index: int, _x: int, _y: int, _color: 
 			if (puzzle_array[_array_index + array_width].get_node("Rotation/Button")._get_state() != _color):
 				if not _region.has(puzzle_array[_array_index + (array_width * 2)]):
 					_connect_cell(_region, _array_index + (array_width * 2), _x, _y+1, _color)
+
+func _play_line_toggle():
+	%LineSFXPlayer.play()
+
+func _play_victory_jingle(_success: bool):
+	if (_success):
+		%VictoryJinglePlayer.stream = sfx_success
+	else:
+		%VictoryJinglePlayer.stream = sfx_failure
+	%VictoryJinglePlayer.play()
+
+func _on_submit_button_pressed() -> void:
+	if _check_loops():
+		(get_node("../../..") as LevelSelectMenu).LevelComplete.emit("res://level_data/final/"+str(puzzle_id)+".json")
+		_play_victory_jingle(true)
+	else:
+		_play_victory_jingle(false)
+
+
+func _on_prev_button_pressed() -> void:
+	var level_data: JSON = JSON.new()
+	var error = level_data.parse(FileAccess.get_file_as_string("res://level_data/"+prev_level+".json"))
+	if error == OK:
+		_accept_level_data(level_data.data)
+
+
+func _on_next_button_pressed() -> void:
+	var level_data: JSON = JSON.new()
+	var error = level_data.parse(FileAccess.get_file_as_string("res://level_data/"+next_level+".json"))
+	if error == OK:
+		_accept_level_data(level_data.data)
+
+
+func _on_reset_button_pressed() -> void:
+	for i in range(1, puzzle_array.size(), 2):
+			puzzle_array[i].get_node("Rotation/Button")._set_state(1)
+
+
+func _on_menu_button_pressed() -> void:
+	queue_free()
+	(get_node("../../..") as LevelSelectMenu)._return_from_puzzle()

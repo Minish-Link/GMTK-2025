@@ -1,8 +1,8 @@
 {
-	"name": "Staircase",
+	"name": "Level 4: Staircase",
 	"id": 4,
-	"prev_level": "final/03",
-	"next_level": "final/05",
+	"prev_level": "final/3",
+	"next_level": "final/5",
 	"width": 3,
 	"height": 3,
 	"color_amount": 1,

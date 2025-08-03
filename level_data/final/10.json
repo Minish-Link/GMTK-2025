@@ -1,7 +1,7 @@
 {
-	"name": "Three Hermits",
+	"name": "Level 10: Three Hermits",
 	"id": 10,
-	"prev_level": "final/09",
+	"prev_level": "final/9",
 	"next_level": "final/11",
 	"width": 5,
 	"height": 5,

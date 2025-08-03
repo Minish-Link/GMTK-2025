@@ -1,8 +1,8 @@
 {
-	"name": "Twisted Corners",
+	"name": "Level 3: Twisted Corners",
 	"id": 3,
-	"prev_level": "final/02",
-	"next_level": "final/04",
+	"prev_level": "final/2",
+	"next_level": "final/4",
 	"width": 3,
 	"height": 3,
 	"color_amount": 1,

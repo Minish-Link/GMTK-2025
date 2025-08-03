@@ -1,0 +1,11 @@
+{
+	"name": "Level 1: Blank Space",
+	"id": 1,
+	"prev_level": "",
+	"next_level": "final/2",
+	"width": 3,
+	"height": 3,
+	"color_amount": 1,
+	"rules": [],
+	"description": "Welcome to Bi-Loop!\n\nIn this game, you click on the lines to draw red lines.\n\nFor the puzzle to be valid, you must draw a red loop on the grid.\n\nA loop is a continuous series of line segments that has no end points and no branching paths"
+}

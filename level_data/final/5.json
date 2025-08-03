@@ -1,8 +1,8 @@
 {
-	"name": "Perfect Number",
+	"name": "Level 5: Perfect Number",
 	"id": 5,
-	"prev_level": "final/04",
-	"next_level": "final/06",
+	"prev_level": "final/4",
+	"next_level": "final/6",
 	"width": 3,
 	"height": 3,
 	"color_amount": 1,

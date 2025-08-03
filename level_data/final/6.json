@@ -1,8 +1,8 @@
 {
-	"name": "Triple Threat",
+	"name": "Level 6: Triple Threat",
 	"id": 6,
-	"prev_level": "final/05",
-	"next_level": "final/07",
+	"prev_level": "final/5",
+	"next_level": "final/7",
 	"width": 3,
 	"height": 3,
 	"color_amount": 1,

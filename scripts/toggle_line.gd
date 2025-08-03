@@ -29,14 +29,14 @@ func _on_Button_gui_input(event: InputEvent):
 					state = _new_color as LineState
 				else:
 					state = LineState.Blank
-				get_node("../../../../..")._check_loops()
+				(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
 				get_parent()._draw()
 			MOUSE_BUTTON_RIGHT:
 				if state == LineState.Erased:
 					state = LineState.Blank
 				else:
 					state = LineState.Erased
-				get_node("../../../../..")._check_loops()
+				#get_node("../../../../..")._check_loops()
 				get_parent()._draw()
 			MOUSE_BUTTON_MIDDLE:
 				if state == LineState.Pink:
@@ -46,4 +46,8 @@ func _on_Button_gui_input(event: InputEvent):
 				get_parent()._draw()
 
 func _get_state() -> int:
-	return int(state)
+	return state as int
+
+func _set_state(_new_state: int):
+	state = _new_state as LineState
+	get_parent()._draw()

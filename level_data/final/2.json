@@ -1,8 +1,8 @@
 {
-	"name": "Four Corners",
+	"name": "Level 2: Four Corners",
 	"id": 2,
-	"prev_level": "final/01",
-	"next_level": "final/03",
+	"prev_level": "final/1",
+	"next_level": "final/3",
 	"width": 3,
 	"height": 3,
 	"color_amount": 1,

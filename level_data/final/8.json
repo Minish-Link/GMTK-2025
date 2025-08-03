@@ -1,8 +1,8 @@
 {
-	"name": "Eight of Clubs",
+	"name": "Level 8: Eight of Clubs",
 	"id": 8,
-	"prev_level": "final/07",
-	"next_level": "final/09",
+	"prev_level": "final/7",
+	"next_level": "final/9",
 	"width": 4,
 	"height": 4,
 	"color_amount": 1,

@@ -39,7 +39,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "01"
-level_path = "res://level_data/final/01.json"
+level_path = "res://level_data/final/1.json"
 
 [node name="02Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
 layout_mode = 2
@@ -47,7 +47,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "02"
-level_path = "res://level_data/final/02.json"
+level_path = "res://level_data/final/2.json"
 
 [node name="03Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
 layout_mode = 2
@@ -55,7 +55,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "03"
-level_path = "res://level_data/final/03.json"
+level_path = "res://level_data/final/3.json"
 
 [node name="04Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
 layout_mode = 2
@@ -63,7 +63,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "04"
-level_path = "res://level_data/final/04.json"
+level_path = "res://level_data/final/4.json"
 
 [node name="05Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
 layout_mode = 2
@@ -71,7 +71,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "05"
-level_path = "res://level_data/final/05.json"
+level_path = "res://level_data/final/5.json"
 
 [node name="06Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
 layout_mode = 2
@@ -79,7 +79,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "06"
-level_path = "res://level_data/final/06.json"
+level_path = "res://level_data/final/6.json"
 
 [node name="07Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
 layout_mode = 2
@@ -87,7 +87,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "07"
-level_path = "res://level_data/final/07.json"
+level_path = "res://level_data/final/7.json"
 
 [node name="08Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
 layout_mode = 2
@@ -95,7 +95,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "08"
-level_path = "res://level_data/final/08.json"
+level_path = "res://level_data/final/8.json"
 
 [node name="09Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
 layout_mode = 2
@@ -103,7 +103,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "09"
-level_path = "res://level_data/final/09.json"
+level_path = "res://level_data/final/9.json"
 
 [node name="10Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_dm02g")]
 layout_mode = 2

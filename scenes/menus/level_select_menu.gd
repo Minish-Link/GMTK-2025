@@ -1,3 +1,4 @@
+class_name LevelSelectMenu
 extends Control
 
 # Doritos
@@ -28,3 +29,6 @@ func _input(_ev):
 
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
+
+func _return_from_puzzle():
+	pass

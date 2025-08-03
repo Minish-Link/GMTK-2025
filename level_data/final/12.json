@@ -1,8 +1,8 @@
 {
-	"name": "Off Suit",
+	"name": "Level 12: Off Suit",
 	"id": 12,
 	"prev_level": "final/11",
-	"next_level": "final/12",
+	"next_level": "final/13",
 	"width": 2,
 	"height": 2,
 	"color_amount": 2,
