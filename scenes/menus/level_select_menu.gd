@@ -31,4 +31,7 @@ func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
 
 func _return_from_puzzle():
-	pass
+	get_node("LevelSelectCanvasLayer").show()
+	for child in get_node("LevelCanvasLayer").get_children():
+		if is_instance_valid(child):
+			child.queue_free()

@@ -266,5 +266,5 @@ func _on_reset_button_pressed() -> void:
 
 
 func _on_menu_button_pressed() -> void:
-	queue_free()
 	(get_node("../../..") as LevelSelectMenu)._return_from_puzzle()
+	

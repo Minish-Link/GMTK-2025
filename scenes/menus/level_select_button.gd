@@ -16,7 +16,7 @@ func _on_pressed() -> void:
 		#color_count = 2
 		#_create_grid(7,7)
 		puzzle_scene.get_node("PuzzleGrid")._accept_level_data(level_data.data)
-		get_parent().hide()
+		get_node("../../../LevelSelectCanvasLayer").hide()
 		get_node("../../../LevelCanvasLayer").add_child(puzzle_scene)
 		#process_mode = Node.PROCESS_MODE_DISABLED
 	else:
