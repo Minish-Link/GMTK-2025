@@ -14,7 +14,7 @@ var default_settings: Dictionary = {
 	"sfx_volume": 0.3,
 	"color_blind": 0
 }
-var settings_data = default_settings
+var settings_data: Dictionary = default_settings
 
 var settings_changed: bool = false
 

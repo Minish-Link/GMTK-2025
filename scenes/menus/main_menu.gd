@@ -5,7 +5,7 @@ var default_settings: Dictionary = {
 	"sfx_volume": 0.3,
 	"color_blind": 0
 }
-var settings_data = default_settings
+var settings_data: Dictionary = default_settings
 
 var main_bus_index = AudioServer.get_bus_index("Master")
 var music_bus_index = AudioServer.get_bus_index("Music")
@@ -17,8 +17,8 @@ func _ready() -> void:
 		settings_file.store_string(JSON.stringify(settings_data))
 	else:
 		settings_data = JSON.parse_string(FileAccess.get_file_as_string("user://settings.json"))
-	
-	
+		
+	#print(settings_data)
 	AudioServer.set_bus_volume_linear(main_bus_index,settings_data["main_volume"])
 	AudioServer.set_bus_volume_linear(music_bus_index,settings_data["music_volume"]) 
 	AudioServer.set_bus_volume_linear(sfx_bus_index,settings_data["sfx_volume"]) 
