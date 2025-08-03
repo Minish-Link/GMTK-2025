@@ -76,19 +76,18 @@ func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int =
 		color_id = ColorID.Blue
 	elif (_color == "purple"):
 		color_id = ColorID.Purple
-		print(colorblind)
 		if colorblind == 0:
-			%Sprite.modulate = Color.PURPLE
-			%TextLabel.modulate = Color.PURPLE
+			%Sprite.modulate = Color.MEDIUM_PURPLE
+			%TextLabel.modulate = Color.MEDIUM_PURPLE
 		elif colorblind == 1:
-			%Sprite.modulate = Color(0.5, 0.8, 0.5, 1.0)
-			%TextLabel.modulate = Color(0.5, 0.8, 0.5, 1.0)
+			%Sprite.modulate = Color(0.67, 1.0, 0.67, 1.0)
+			%TextLabel.modulate = Color(0.67, 1.0, 0.67, 1.0)
 		else:
-			%Sprite.modulate = Color(0.8, 0.8, 0.0, 1.0)
-			%TextLabel.modulate = Color(0.8, 0.8, 0.0, 1.0)
+			%Sprite.modulate = Color.YELLOW
+			%TextLabel.modulate = Color.YELLOW
 	else:
-		%Sprite.modulate = Color.BLACK
-		%TextLabel.modulate = Color.BLACK
+		%Sprite.modulate = Color.WHITE
+		%TextLabel.modulate = Color.WHITE
 		color_id = ColorID.Black
 
 func _get_suit() -> int:

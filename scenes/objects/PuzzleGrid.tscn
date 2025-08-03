@@ -52,7 +52,7 @@ offset_top = -385.0
 offset_right = 272.0
 offset_bottom = 385.0
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.374139, 0.374139, 0.374139, 1)
 
 [node name="RightBorder" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 6
@@ -65,7 +65,7 @@ offset_top = -385.0
 offset_bottom = 385.0
 grow_horizontal = 0
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.374139, 0.374139, 0.374139, 1)
 
 [node name="TopBorder" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 5
@@ -75,7 +75,7 @@ offset_left = -642.0
 offset_right = 642.0
 offset_bottom = 51.0
 grow_horizontal = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.374139, 0.374139, 0.374139, 1)
 
 [node name="BottomBorder" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 7
@@ -88,7 +88,7 @@ offset_top = -51.0
 offset_right = 642.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(0, 0, 0, 1)
+color = Color(0.374139, 0.374139, 0.374139, 1)
 
 [node name="Name" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 5
@@ -115,14 +115,6 @@ grow_horizontal = 2
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 18
 text = "Description Goes Here"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -130.0
-offset_top = 86.0
-offset_right = 152.0
-offset_bottom = 336.0
-theme_override_constants/separation = 50
 
 [node name="ResetBack" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 5
@@ -258,15 +250,18 @@ Level Select"
 [node name="LineSFXPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_6b2c1")
+volume_db = 10.0
 bus = &"SFX"
 
 [node name="SwapSFXPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_c6hq6")
+volume_db = -10.0
 bus = &"SFX"
 
 [node name="VictoryJinglePlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+volume_db = 5.0
 bus = &"SFX"
 
 [node name="Particles" type="CPUParticles2D" parent="."]

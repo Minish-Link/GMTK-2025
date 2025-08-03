@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://tv2h3m2ukxst" path="res://scenes/objects/PuzzleGrid.tscn" id="1_2mtb0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mtb0"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0, 0, 0, 1)
 
 [node name="MainScene" type="PanelContainer"]
 anchors_preset = 15

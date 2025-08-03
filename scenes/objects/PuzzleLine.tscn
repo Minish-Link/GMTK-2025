@@ -30,7 +30,7 @@ script = ExtResource("1_ohmyq")
 
 [node name="Line2D" type="Line2D" parent="Rotation"]
 unique_name_in_owner = true
-points = PackedVector2Array(-30, 0, 30, 0)
+points = PackedVector2Array(-35, 0, 35, 0)
 width = 5.0
 
 [connection signal="gui_input" from="Rotation/Button" to="Rotation/Button" method="_on_Button_gui_input"]

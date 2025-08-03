@@ -1,13 +1,15 @@
 {
-	"name": "Level 17: Saturn",
+	"name": "Level 17: Neopolitan Ice Cream",
 	"id": 17,
 	"prev_level": "final/16",
 	"next_level": "final/18",
-	"width": 5,
-	"height": 5,
+	"width": 3,
+	"height": 3,
 	"color_amount": 2,
 	"rules": [
-		{"x": 2, "y": 1, "type": "area", "color": "blue", "number": 24},
-		{"x": 2, "y": 2, "type": "area", "color": "red", "number": 9},
-	]
+		{"x": 0, "y": 0, "type": "area", "color": "red", "number": 3},
+		{"x": 1, "y": 1, "type": "area", "color": "black", "number": 3},
+		{"x": 2, "y": 2, "type": "area", "color": "blue", "number": 3},
+	],
+	"description": "If a symbol is red, Its rule will be checked as though there are no blue lines.\nLikewise, a blue symbol will ignore red lines."
 }

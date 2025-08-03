@@ -13,5 +13,5 @@
 		{"x": 2, "y": 1, "type": "pips", "color": "black", "number": 4},
 		{"x": 1, "y": 2, "type": "pips", "color": "black", "number": 4}
 	],
-	"description": "From this point forward, you will now have access to different colors of loops!\n\nUse the mouse scroll wheel to swap between red and blue lines.\n\nRed lines are allowed to intersect Blue lines at the points of the grid, but their lines may not overlap."
+	"description": "From this point forward, you will now have access to two different colors of loops!\n\nUse the mouse scroll wheel to swap between red and blue lines.\n\nRed lines are allowed to intersect Blue lines at the points of the grid, but their lines may not overlap."
 }

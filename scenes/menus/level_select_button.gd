@@ -22,6 +22,7 @@ func _on_pressed() -> void:
 		#process_mode = Node.PROCESS_MODE_DISABLED
 	else:
 		print("Couldn't load JSON")
+	%ClickAudio.play()
 
 func _is_completed(path: String) -> void:
 	#print("Entered _is_completed")

@@ -1,0 +1,52 @@
+{
+	"name": "Level 24: Dice Bag",
+	"id": 24,
+	"prev_level": "final/23",
+	"next_level": "final/25",
+	"width": 6,
+	"height": 6,
+	"color_amount": 2,
+	"rules": [
+		{"x": 0, "y": 0, "type": "pips", "color": "blue", "number": 0},
+		{"x": 1, "y": 0, "type": "pips", "color": "purple", "number": 1},
+		{"x": 2, "y": 0, "type": "pips", "color": "black", "number": 2},
+		{"x": 3, "y": 0, "type": "pips", "color": "red", "number": 3},
+		{"x": 4, "y": 0, "type": "pips", "color": "black", "number": 2},
+		{"x": 5, "y": 0, "type": "pips", "color": "red", "number": 3},
+		
+		{"x": 0, "y": 1, "type": "pips", "color": "red", "number": 2},
+		{"x": 1, "y": 1, "type": "pips", "color": "blue", "number": 3},
+		{"x": 2, "y": 1, "type": "pips", "color": "purple", "number": 1},
+		{"x": 3, "y": 1, "type": "pips", "color": "black", "number": 1},
+		{"x": 4, "y": 1, "type": "pips", "color": "purple", "number": 1},
+		{"x": 5, "y": 1, "type": "pips", "color": "red", "number": 2},
+		
+		{"x": 0, "y": 2, "type": "pips", "color": "blue", "number": 2},
+		{"x": 1, "y": 2, "type": "pips", "color": "purple", "number": 2},
+		{"x": 2, "y": 2, "type": "pips", "color": "black", "number": 4},
+		{"x": 3, "y": 2, "type": "pips", "color": "purple", "number": 1},
+		{"x": 4, "y": 2, "type": "pips", "color": "red", "number": 1},
+		{"x": 5, "y": 2, "type": "pips", "color": "red", "number": 1},
+		
+		{"x": 0, "y": 3, "type": "pips", "color": "blue", "number": 2},
+		{"x": 1, "y": 3, "type": "pips", "color": "red", "number": 3},
+		{"x": 2, "y": 3, "type": "pips", "color": "blue", "number": 2},
+		{"x": 3, "y": 3, "type": "pips", "color": "red", "number": 0},
+		{"x": 4, "y": 3, "type": "pips", "color": "purple", "number": 1},
+		{"x": 5, "y": 3, "type": "pips", "color": "purple", "number": 1},
+		
+		{"x": 0, "y": 4, "type": "pips", "color": "red", "number": 0},
+		{"x": 1, "y": 4, "type": "pips", "color": "black", "number": 3},
+		{"x": 2, "y": 4, "type": "pips", "color": "black", "number": 3},
+		{"x": 3, "y": 4, "type": "pips", "color": "red", "number": 0},
+		{"x": 4, "y": 4, "type": "pips", "color": "purple", "number": 1},
+		{"x": 5, "y": 4, "type": "pips", "color": "red", "number": 1},
+		
+		{"x": 0, "y": 5, "type": "pips", "color": "blue", "number": 3},
+		{"x": 1, "y": 5, "type": "pips", "color": "red", "number": 1},
+		{"x": 2, "y": 5, "type": "pips", "color": "blue", "number": 1},
+		{"x": 3, "y": 5, "type": "pips", "color": "purple", "number": 1},
+		{"x": 4, "y": 5, "type": "pips", "color": "blue", "number": 1},
+		{"x": 5, "y": 5, "type": "pips", "color": "purple", "number": 1}
+	]
+}

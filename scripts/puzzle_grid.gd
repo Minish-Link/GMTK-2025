@@ -67,7 +67,6 @@ func _accept_level_data(_data: Dictionary):
 	puzzle_array.clear()
 	rule_array.clear()
 	
-	print(_data)
 	name_text.text = _data["name"]
 	puzzle_id = _data["id"]
 	

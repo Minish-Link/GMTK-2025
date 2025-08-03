@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjijbyubeoryh"]
+[gd_scene load_steps=5 format=3 uid="uid://cjijbyubeoryh"]
 
 [ext_resource type="Script" uid="uid://bvqf8upp78ws6" path="res://scenes/menus/settings_menu.gd" id="1_hayap"]
+[ext_resource type="AudioStream" uid="uid://deuh1yudv3m17" path="res://audio/sfx/GMTK2025_Click2.ogg" id="2_7i3iu"]
+
+[sub_resource type="Gradient" id="Gradient_hayap"]
+colors = PackedColorArray(1, 0, 0, 0.498039, 0, 0, 1, 0.498039)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7i3iu"]
+gradient = SubResource("Gradient_hayap")
+fill_from = Vector2(0.495726, 0)
+fill_to = Vector2(0.542735, 1)
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
@@ -10,6 +19,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hayap")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = SubResource("GradientTexture2D_7i3iu")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -214,6 +230,12 @@ text = "Reset to Defaults"
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Back to Main Menu"
+
+[node name="ClickAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_7i3iu")
+volume_db = 10.0
+bus = &"SFX"
 
 [connection signal="drag_ended" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer/MarginContainer/HSplitContainer/MainVolumeSlider" to="." method="_on_main_volume_slider_drag_ended"]
 [connection signal="value_changed" from="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer/VolumeContainer/VolumeSettingsControlContainer/MainVolumeControlContainer/MarginContainer/HSplitContainer/MainVolumeSlider" to="." method="_on_main_volume_slider_value_changed"]
