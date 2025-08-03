@@ -57,9 +57,9 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 
 func _on_reset_button_pressed() -> void:
-	settings_data["volume"]["main"] = 30
-	settings_data["volume"]["music"] = 30
-	settings_data["volume"]["sfx"] = 30
+	settings_data["volume"]["main"] = 0.3
+	settings_data["volume"]["music"] = 0.3
+	settings_data["volume"]["sfx"] = 0.3
 	settings_data["accessibility"]["color_blind"] = 0
 	main_volume.value = settings_data["volume"]["main"]
 	music_volume.value = settings_data["volume"]["music"]
