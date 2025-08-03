@@ -7,8 +7,8 @@ extends Control
 @export var next_level_button: ColorRect
 @export var prev_level_button: ColorRect
 
-var sfx_success = preload("res://audio/music/jingles-pizzicato_08.ogg")
-var sfx_failure = preload("res://audio/music/jingles-pizzicato_05.ogg")
+var sfx_success = preload("res://audio/sfx/GMTK2025_Success.ogg")
+var sfx_failure = preload("res://audio/sfx/GMTK2025_Failure.ogg")
 var sfx_switch1 = preload("res://audio/sfx/switch_002.ogg")
 var sfx_switch2 = preload("res://audio/sfx/switch_007.ogg")
 

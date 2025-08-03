@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://tv2h3m2ukxst"]
 
 [ext_resource type="Script" uid="uid://w02pqweeurnt" path="res://scripts/puzzle_grid.gd" id="1_dpn00"]
+[ext_resource type="AudioStream" uid="uid://deuh1yudv3m17" path="res://audio/sfx/GMTK2025_Click2.ogg" id="2_6b2c1"]
 [ext_resource type="Texture2D" uid="uid://yt43yaknc5kr" path="res://textures/drawing_brush_large.svg" id="2_d0j8h"]
-[ext_resource type="AudioStream" uid="uid://ds4l0nory2u38" path="res://audio/sfx/click_001.ogg" id="3_6b2c1"]
 [ext_resource type="AudioStream" uid="uid://08j085cdg26k" path="res://audio/sfx/switch_002.ogg" id="4_c6hq6"]
 [ext_resource type="Texture2D" uid="uid://dyimgrb6gxvqj" path="res://textures/star.png" id="4_d0j8h"]
 
@@ -257,7 +257,7 @@ Level Select"
 
 [node name="LineSFXPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_6b2c1")
+stream = ExtResource("2_6b2c1")
 bus = &"SFX"
 
 [node name="SwapSFXPlayer" type="AudioStreamPlayer" parent="."]
