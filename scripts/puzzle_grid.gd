@@ -38,7 +38,7 @@ var played_victory: bool = false
 var colorblind_setting
 
 func _init() -> void:
-	colorblind_setting = TOML.parse("res://player_data/settings.toml")["accessibility"]["color_blind"]
+	colorblind_setting = JSON.parse_string(FileAccess.get_file_as_string("user://settings.json"))["color_blind"]
 
 func _input(event):
 	if event.is_action_pressed("swap"):

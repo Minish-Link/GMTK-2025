@@ -9,66 +9,70 @@ var main_bus_index = AudioServer.get_bus_index("Master")
 var music_bus_index = AudioServer.get_bus_index("Music")
 var sfx_bus_index = AudioServer.get_bus_index("SFX")
 
-var settings_data: Dictionary = TOML.parse("res://player_data/settings.toml")
+var settings_data = JSON.new()
 var settings_changed: bool = false
 
 func _ready() -> void:
-	settings_data = TOML.parse("res://player_data/settings.toml")
-	
-	main_volume.value = settings_data["volume"]["main"]
-	music_volume.value = settings_data["volume"]["music"]
-	sfx_volume.value = settings_data["volume"]["sfx"]
-	
-	color_blind_setting.select(settings_data["accessibility"]["color_blind"])
+	var error = settings_data.parse(FileAccess.get_file_as_string("user://settings.json"))
+	if error == OK:
+		settings_data = settings_data.get_data()
+		main_volume.value = settings_data["main_volume"]
+		music_volume.value = settings_data["music_volume"]
+		sfx_volume.value = settings_data["sfx_volume"]
+		
+		color_blind_setting.select(settings_data["color_blind"])
+	else:
+		#settings_data = {}
+		_on_reset_button_pressed()
 	
 func _input(_ev):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		if settings_changed:
-			print("Dumping Settings TOML")
-			TOML.dump("user://player_data/settings.toml", settings_data)
+			var settings_file = FileAccess.open("user://settings.json", FileAccess.WRITE)
+			settings_file.store_string(JSON.stringify(settings_data))
 		get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
 
 func _on_back_button_pressed() -> void:
 	%ClickAudio.play()
 	if settings_changed:
-		print("Dumping Settings TOML")
-		TOML.dump("user://player_data/settings.toml", settings_data)
+		var settings_file = FileAccess.open("user://settings.json", FileAccess.WRITE)
+		settings_file.store_string(JSON.stringify(settings_data))
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
 
 
 func _on_button_item_selected(index: int) -> void:
 	#print("Changed Color Blind Setting")
 	settings_changed = true
-	settings_data["accessibility"]["color_blind"] = index
+	settings_data["color_blind"] = index
 	%ClickAudio.play()
 
 func _on_main_volume_slider_value_changed(value: float) -> void:
 	settings_changed = true
 	AudioServer.set_bus_volume_linear(main_bus_index,value)
-	settings_data["volume"]["main"] = value
+	settings_data["main_volume"] = value
 	%ClickAudio.play()
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	settings_changed = true
 	AudioServer.set_bus_volume_linear(music_bus_index,value)
-	settings_data["volume"]["music"] = value
+	settings_data["music_volume"] = value
 	%ClickAudio.play()
 
 func _on_sfx_slider_value_changed(value: float) -> void:
 	settings_changed = true
 	AudioServer.set_bus_volume_linear(sfx_bus_index,value)
-	settings_data["volume"]["sfx"] = value
+	settings_data["sfx_volume"] = value
 	%ClickAudio.play()
 
 
 func _on_reset_button_pressed() -> void:
-	settings_data["volume"]["main"] = 0.3
-	settings_data["volume"]["music"] = 0.3
-	settings_data["volume"]["sfx"] = 0.3
-	settings_data["accessibility"]["color_blind"] = 0
-	main_volume.value = settings_data["volume"]["main"]
-	music_volume.value = settings_data["volume"]["music"]
-	sfx_volume.value = settings_data["volume"]["sfx"]
-	color_blind_setting.select(settings_data["accessibility"]["color_blind"])
+	settings_data["main_volume"] = 0.3
+	settings_data["music_volume"] = 0.3
+	settings_data["sfx_volume"] = 0.3
+	settings_data["color_blind"] = 0
+	main_volume.value = settings_data["main_volume"]
+	music_volume.value = settings_data["music_volume"]
+	sfx_volume.value = settings_data["sfx_volume"]
+	color_blind_setting.select(settings_data["color_blind"])
 	settings_changed = true
 	%ClickAudio.play()

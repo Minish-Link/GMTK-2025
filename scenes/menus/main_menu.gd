@@ -1,16 +1,21 @@
 extends Control
 
+var settings_data = JSON.new()
+
+var main_bus_index = AudioServer.get_bus_index("Master")
+var music_bus_index = AudioServer.get_bus_index("Music")
+var sfx_bus_index = AudioServer.get_bus_index("SFX")
+
 func _ready() -> void:
-	var main_bus_index = AudioServer.get_bus_index("Master")
-	var music_bus_index = AudioServer.get_bus_index("Music")
-	var sfx_bus_index = AudioServer.get_bus_index("SFX")
 	
-	var settings_data = TOML.parse("res://player_data/settings.toml")
+	var error = settings_data.parse(FileAccess.get_file_as_string("user://settings.json"))
+	if error == OK:
+		settings_data = settings_data.get_data()
 	
 	
-	AudioServer.set_bus_volume_linear(main_bus_index,settings_data["volume"]["main"])
-	AudioServer.set_bus_volume_linear(music_bus_index,settings_data["volume"]["music"]) 
-	AudioServer.set_bus_volume_linear(sfx_bus_index,settings_data["volume"]["sfx"]) 
+		AudioServer.set_bus_volume_linear(main_bus_index,settings_data["main_volume"])
+		AudioServer.set_bus_volume_linear(music_bus_index,settings_data["music_volume"]) 
+		AudioServer.set_bus_volume_linear(sfx_bus_index,settings_data["sfx_volume"]) 
 	
 	#color_blind_setting.select(settings_data["accessibility"]["color_blind"])
 

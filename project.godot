@@ -13,7 +13,7 @@ config_version=5
 config/name="Loop Puzzles"
 config/tags=PackedStringArray("game_jam", "puzzle")
 run/main_scene="uid://oi6prrwx6swl"
-config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://textures/icon.svg"
 
 [autoload]
