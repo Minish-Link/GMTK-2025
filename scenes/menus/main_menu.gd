@@ -1,21 +1,27 @@
 extends Control
-
-var settings_data = JSON.new()
+var default_settings: Dictionary = {
+	"main_volume": 0.3,
+	"music_volume": 0.3,
+	"sfx_volume": 0.3,
+	"color_blind": 0
+}
+var settings_data = default_settings
 
 var main_bus_index = AudioServer.get_bus_index("Master")
 var music_bus_index = AudioServer.get_bus_index("Music")
 var sfx_bus_index = AudioServer.get_bus_index("SFX")
 
 func _ready() -> void:
+	if not FileAccess.file_exists("user://settings.json"):
+		var settings_file = FileAccess.open("user://settings.json", FileAccess.WRITE)
+		settings_file.store_string(JSON.stringify(settings_data))
+	else:
+		settings_data = JSON.parse_string(FileAccess.get_file_as_string("user://settings.json"))
 	
-	var error = settings_data.parse(FileAccess.get_file_as_string("user://settings.json"))
-	if error == OK:
-		settings_data = settings_data.get_data()
 	
-	
-		AudioServer.set_bus_volume_linear(main_bus_index,settings_data["main_volume"])
-		AudioServer.set_bus_volume_linear(music_bus_index,settings_data["music_volume"]) 
-		AudioServer.set_bus_volume_linear(sfx_bus_index,settings_data["sfx_volume"]) 
+	AudioServer.set_bus_volume_linear(main_bus_index,settings_data["main_volume"])
+	AudioServer.set_bus_volume_linear(music_bus_index,settings_data["music_volume"]) 
+	AudioServer.set_bus_volume_linear(sfx_bus_index,settings_data["sfx_volume"]) 
 	
 	#color_blind_setting.select(settings_data["accessibility"]["color_blind"])
 
