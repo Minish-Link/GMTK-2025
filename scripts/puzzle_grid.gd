@@ -9,6 +9,8 @@ extends Control
 
 var sfx_success = preload("res://audio/music/jingles-pizzicato_08.ogg")
 var sfx_failure = preload("res://audio/music/jingles-pizzicato_05.ogg")
+var sfx_switch1 = preload("res://audio/sfx/switch_002.ogg")
+var sfx_switch2 = preload("res://audio/sfx/switch_007.ogg")
 
 var puzzle_id: int
 
@@ -47,9 +49,14 @@ func _swap_color():
 		if current_color == 2:
 			print("Switching to Blue")
 			current_color = 3
+			%BrushSprite.modulate = Color.DODGER_BLUE
+			%SwapSFXPlayer.stream = sfx_switch2
 		else:
 			print("Switching to Red")
 			current_color = 2
+			%BrushSprite.modulate = Color.RED
+			%SwapSFXPlayer.stream = sfx_switch1
+		%SwapSFXPlayer.play()
 
 func _get_color() -> int:
 	return current_color
@@ -81,6 +88,12 @@ func _accept_level_data(_data: Dictionary):
 		next_level_button.visible = false
 		
 	color_count = _data["color_amount"]
+	if color_count > 1:
+		%BrushSprite.visible = true
+		%BrushSprite.modulate = Color.RED
+	else:
+		%BrushSprite.visible = false
+	
 	_create_grid(_data["width"], _data["height"])
 	for _rule in _data["rules"]:
 		(rule_array[_rule["x"] + (puzzle_width * _rule["y"])] as PuzzleRule)._set_rule(_rule["type"], _rule["color"], _rule["number"])

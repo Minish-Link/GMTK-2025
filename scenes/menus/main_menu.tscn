@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://oi6prrwx6swl"]
 
 [ext_resource type="Script" uid="uid://bujvqg6ej62xk" path="res://scenes/menus/main_menu.gd" id="1_ovrgc"]
-[ext_resource type="Texture2D" uid="uid://1jukk3ps8tln" path="res://textures/icon.svg" id="1_xqga4"]
+[ext_resource type="Texture2D" uid="uid://c2rpl4l4hvq8e" path="res://textures/BiLoop.png" id="2_ovrgc"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -38,7 +38,7 @@ theme_override_constants/margin_bottom = 15
 [node name="TitleRect" type="TextureRect" parent="PanelContainer/MarginContainer/TitleAndButtonsContainer/TitleContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-texture = ExtResource("1_xqga4")
+texture = ExtResource("2_ovrgc")
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/TitleAndButtonsContainer"]
 layout_mode = 2
