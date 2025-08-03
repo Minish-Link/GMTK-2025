@@ -31,6 +31,8 @@ var current_color: int
 var next_level: String
 var prev_level: String
 
+var played_victory: bool = false
+
 func _input(event):
 	if event.is_action_pressed("swap"):
 		_swap_color()
@@ -116,7 +118,11 @@ func _create_grid(_width: int, _height: int):
 			puzzle_array[i] = rule_node
 			rule_array[_rule_count] = rule_node
 			_rule_count += 1
-	get_node("Camera")._zoom_camera(_width, _height)
+	var zoom_x = 1.0 / (puzzle_width / 5.0)
+	var zoom_y = 1.0 / (puzzle_height / 5.0)
+	var final_zoom = min(zoom_x, zoom_y) * 0.9
+	%GridZoom.scale = (Vector2(final_zoom, final_zoom))
+	#get_node("Camera")._zoom_camera(_width, _height)
 
 func _check_loops() -> bool:
 	var _at_least_one_loop: bool = false
@@ -234,6 +240,7 @@ func _play_victory_jingle(_success: bool):
 func _on_submit_button_pressed() -> void:
 	if _check_loops():
 		(get_node("../../..") as LevelSelectMenu).LevelComplete.emit("res://level_data/final/"+str(puzzle_id)+".json")
+		%Particles.emitting = true
 		_play_victory_jingle(true)
 	else:
 		_play_victory_jingle(false)
