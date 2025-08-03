@@ -8,6 +8,7 @@ var level_data: JSON = JSON.new()
 func _ready() -> void:
 	#print("Trying to Connect")
 	get_node("../../../../LevelSelectMenu").connect("LevelComplete", _is_completed)
+	get_node("../../../../LevelSelectMenu").connect("Reset", _is_reset)
 
 func _on_pressed() -> void:
 	var puzzle_scene = load("res://scenes/levels/main_puzzle_scene.tscn").instantiate()
@@ -26,3 +27,7 @@ func _is_completed(path: String) -> void:
 	#print("Entered _is_completed")
 	if path == level_path:
 		set("theme_override_colors/font_color",Color.GREEN)
+
+func _is_reset(answer: bool) -> void:
+	if answer:
+		set("theme_override_colors/font_color",Color(1,1,1,0.9))

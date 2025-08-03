@@ -12,12 +12,12 @@ extends Control
 #  Secondary colors ( combinations of primary ) must be satisfied by each color of loop *independently*
 #  Black does not see the color of the lines ( so can be satisfied by "composite" loops of multiple colors
 
-@onready var completion_data = JSON.parse_string(FileAccess.get_file_as_string("res://player_data/completion.json"))
+@onready var completion_data = JSON.parse_string(FileAccess.get_file_as_string("res://player_data/completion.json")) as Array
 
 signal LevelComplete(path)
+signal Reset(bool)
 
 func _ready() -> void:
-	
 	for path in completion_data:
 		#print(path)
 		LevelComplete.emit(path)
@@ -35,3 +35,32 @@ func _return_from_puzzle():
 	for child in get_node("LevelCanvasLayer").get_children():
 		if is_instance_valid(child):
 			child.queue_free()
+
+func _level_completed(path):
+	completion_data.append(path)
+	LevelComplete.emit(path)
+	var completion_file = FileAccess.open("res://player_data/completion.json", FileAccess.WRITE)
+	completion_file.store_string(JSON.stringify(completion_data))
+
+
+func _on_reset_completion_button_pressed() -> void:
+	%ConfirmationPopup.show()
+	
+
+
+func _on_accept_button_pressed() -> void:
+	Reset.emit(true)
+	%ConfirmationPopup.hide()
+
+
+func _on_deny_button_pressed() -> void:
+	Reset.emit(false)
+	%ConfirmationPopup.hide()
+
+
+
+func _on_reset(answer: bool) -> void:
+	if answer:
+		completion_data = []
+		var completion_file = FileAccess.open("res://player_data/completion.json", FileAccess.WRITE)
+		completion_file.store_string("[]")

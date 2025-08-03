@@ -33,6 +33,7 @@ var prev_level: String
 
 var played_victory: bool = false
 
+
 func _input(event):
 	if event.is_action_pressed("swap"):
 		_swap_color()
@@ -239,7 +240,8 @@ func _play_victory_jingle(_success: bool):
 
 func _on_submit_button_pressed() -> void:
 	if _check_loops():
-		(get_node("../../..") as LevelSelectMenu).LevelComplete.emit("res://level_data/final/"+str(puzzle_id)+".json")
+		
+		(get_node("../../..") as LevelSelectMenu)._level_completed("res://level_data/final/"+str(puzzle_id)+".json")
 		%Particles.emitting = true
 		_play_victory_jingle(true)
 	else:
@@ -262,7 +264,7 @@ func _on_next_button_pressed() -> void:
 
 func _on_reset_button_pressed() -> void:
 	for i in range(1, puzzle_array.size(), 2):
-			puzzle_array[i].get_node("Rotation/Button")._set_state(1)
+		puzzle_array[i].get_node("Rotation/Button")._set_state(1)
 
 
 func _on_menu_button_pressed() -> void:

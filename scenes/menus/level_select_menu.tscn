@@ -13,22 +13,43 @@ script = ExtResource("1_v6kjm")
 
 [node name="LevelCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="LevelSelectCanvasLayer" type="CanvasLayer" parent="."]
+[node name="LevelSelectCanvasLayer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="BackButton" type="Button" parent="LevelSelectCanvasLayer"]
-offset_left = 497.0
-offset_top = 607.0
-offset_right = 654.0
-offset_bottom = 638.0
+[node name="ResetCompletionButton" type="Button" parent="LevelSelectCanvasLayer"]
+layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Back to Main Menu"
+text = "Reset Completion Progress"
+
+[node name="ConfirmationPopup" type="PopupPanel" parent="LevelSelectCanvasLayer/ResetCompletionButton"]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 388.0
+offset_bottom = 97.0
+
+[node name="InfoLabel" type="Label" parent="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "This resets all Completion Progress! Are you sure?"
+
+[node name="AcceptButton" type="Button" parent="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Yes"
+
+[node name="DenyButton" type="Button" parent="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "No"
 
 [node name="LevelGrid" type="GridContainer" parent="LevelSelectCanvasLayer"]
-offset_left = 362.0
-offset_top = 254.0
-offset_right = 603.0
-offset_bottom = 307.0
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 5
@@ -185,4 +206,14 @@ theme_override_font_sizes/font_size = 32
 text = "19"
 level_path = "res://level_data/final/19.json"
 
+[node name="BackButton" type="Button" parent="LevelSelectCanvasLayer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to Main Menu"
+
+[connection signal="Reset" from="." to="." method="_on_reset"]
+[connection signal="pressed" from="LevelSelectCanvasLayer/ResetCompletionButton" to="." method="_on_reset_completion_button_pressed"]
+[connection signal="popup_hide" from="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup" to="." method="_on_confirmation_popup_popup_hide"]
+[connection signal="pressed" from="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer/AcceptButton" to="." method="_on_accept_button_pressed"]
+[connection signal="pressed" from="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer/DenyButton" to="." method="_on_deny_button_pressed"]
 [connection signal="pressed" from="LevelSelectCanvasLayer/BackButton" to="." method="_on_back_button_pressed"]
