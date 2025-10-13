@@ -18,7 +18,7 @@ func _ready() -> void:
 	else:
 		settings_data = JSON.parse_string(FileAccess.get_file_as_string("user://settings.json"))
 		
-	#print(settings_data)
+	#print(settings_data) 
 	AudioServer.set_bus_volume_linear(main_bus_index,settings_data["main_volume"])
 	AudioServer.set_bus_volume_linear(music_bus_index,settings_data["music_volume"]) 
 	AudioServer.set_bus_volume_linear(sfx_bus_index,settings_data["sfx_volume"]) 

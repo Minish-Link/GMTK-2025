@@ -1,7 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqs3j2vp1ugo5"]
 
 [ext_resource type="Script" uid="uid://cblopaseo7ysj" path="res://scripts/toggle_line.gd" id="1_ohmyq"]
-[ext_resource type="Script" uid="uid://dw0l1lg5y2tfn" path="res://scripts/draw_line.gd" id="1_p5ewx"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ohmyq"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [node name="PuzzleLine" type="Control"]
 layout_mode = 3
@@ -14,9 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Rotation" type="Node2D" parent="."]
-z_index = 1
 scale = Vector2(1.5, 1.5)
-script = ExtResource("1_p5ewx")
 
 [node name="Button" type="Button" parent="Rotation"]
 self_modulate = Color(1, 1, 1, 0)
@@ -30,7 +33,32 @@ script = ExtResource("1_ohmyq")
 
 [node name="Line2D" type="Line2D" parent="Rotation"]
 unique_name_in_owner = true
+z_index = 3
 points = PackedVector2Array(-35, 0, 35, 0)
-width = 5.0
+width = 8.0
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2DGlow" type="Line2D" parent="Rotation/Line2D"]
+unique_name_in_owner = true
+z_index = -1
+material = SubResource("CanvasItemMaterial_ohmyq")
+points = PackedVector2Array(-35, 0, 35, 0)
+width = 12.0
+default_color = Color(0.498039, 0.498039, 0.498039, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 32
+
+[node name="Line2DGlow2" type="Line2D" parent="Rotation/Line2D/Line2DGlow"]
+unique_name_in_owner = true
+z_index = -1
+material = SubResource("CanvasItemMaterial_ohmyq")
+points = PackedVector2Array(-35, 0, 35, 0)
+width = 16.0
+default_color = Color(0.247059, 0.247059, 0.247059, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 32
 
 [connection signal="gui_input" from="Rotation/Button" to="Rotation/Button" method="_on_Button_gui_input"]

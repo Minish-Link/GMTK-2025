@@ -142,27 +142,136 @@ func _create_grid(_width: int, _height: int):
 	%GridZoom.scale = (Vector2(final_zoom, final_zoom))
 
 func _check_loops() -> bool:
-	var _at_least_one_loop: bool = false
-	for x in range(0, array_width, 2):
-		for y in range(0,puzzle_array.size(),array_width * 2):
-			var _count_red: int = _get_neighboring_line_count(x,y, 2)
-			var _count_blue: int = _get_neighboring_line_count(x,y,3)
-			if not _at_least_one_loop and (_count_red > 0 or _count_blue > 0):
-				_at_least_one_loop = true
-			if (_count_red != 2 and _count_red != 0) or (_count_blue != 2 and _count_blue != 0):
-				print("Sploosh...")
-				return false
-	if (_at_least_one_loop):
-		print("Kaboom!")
-		if _check_rule_nodes():
-			print("Success!")
-			return true
-		else:
-			print("Failure...")
-			return false
-	else:
-		print("Sploosh...")
+	if not _is_loop_color_valid(2):
+		print("Red Loop is not valid")
 		return false
+	if color_count > 1 and not _is_loop_color_valid(3):
+		print("Blue Loop is not valid")
+		return false
+	
+	if not _check_rule_nodes():
+		return false
+	
+	return true
+
+func _is_loop_color_valid(_color: int) -> bool:
+	var _neighbor_count: int = 0
+	var _loop_vertices: Array[int] = []
+	
+	# check if all lines form valid loops.
+	# if they do, all vertices will have either 0 or 2 neighboring lines
+	for x in range(0, array_width, 2): 
+		for y in range(0, puzzle_array.size(), array_width * 2):
+			_neighbor_count = _get_neighboring_line_count(x,y,_color)
+			if not (_neighbor_count == 2 or _neighbor_count == 0):
+				print("Loop is not closed or has intersections")
+				return false
+			if (_neighbor_count == 2):
+				_loop_vertices.append(x+y)
+	
+	if _loop_vertices.size() == 0:
+		print("There are no lines of this color")
+		return false
+		
+	if not _has_only_one_loop(_color, _loop_vertices):
+		print("There are multiple loops of this color")
+		return false
+	
+	return true
+
+func _has_only_one_loop(_color: int, _vertex_array: Array[int]) -> bool:
+	# if there is only one loop, then there will be only two regions:
+	#	a region inside the loop, and a region outside the loop
+	# first iterate through the lines along the edges of the puzzle to check if the loop touches the edge
+	# 	if it does not touch the edge, take any line segment and get the regions on both sides of the line
+	# 	if the sum of the regions is equal to the puzzle, then there are only two regions
+	#	and therefore only one loop
+	#
+	#	if it does touch the edge, get the region inside the loop, and
+	#	get all regions outside the loop that border the edge of the puzzle
+	#	if the sum of the inside region and those outside regions is equal to the puzzle,
+	#	then there is only one loop
+	
+	var _edge_rules_outside_loop = Array()
+	var _edge_rules_inside_loop = Array()
+	
+	# iterate through top row of lines and rules
+	for _line_index in range(1, array_width, 2):
+		if puzzle_array[_line_index].get_node("Rotation/Button")._get_state() == _color:
+			_edge_rules_inside_loop.append(puzzle_array[_line_index + array_width])
+		else:
+			_edge_rules_outside_loop.append(puzzle_array[_line_index + array_width])
+			
+	# iterate through bottom row of lines and rules
+	for _line_index in range(puzzle_array.size() - array_width + 1, puzzle_array.size(), 2):
+		if puzzle_array[_line_index].get_node("Rotation/Button")._get_state() == _color:
+			_edge_rules_inside_loop.append(puzzle_array[_line_index - array_width])
+		else:
+			_edge_rules_outside_loop.append(puzzle_array[_line_index - array_width])
+			
+	# iterate through left column of lines and rules
+	for _line_index in range(array_width, puzzle_array.size(), 2 * array_width):
+		if puzzle_array[_line_index].get_node("Rotation/Button")._get_state() == _color:
+			_edge_rules_inside_loop.append(puzzle_array[_line_index + 1])
+		else:
+			_edge_rules_outside_loop.append(puzzle_array[_line_index + 1])
+			
+	# iterate through right column of lines and rules
+	for _line_index in range((array_width * 2) - 1, puzzle_array.size(), 2 * array_width):
+		if puzzle_array[_line_index].get_node("Rotation/Button")._get_state() == _color:
+			_edge_rules_inside_loop.append(puzzle_array[_line_index - 1])
+		else:
+			_edge_rules_outside_loop.append(puzzle_array[_line_index - 1])
+	
+	# if the loop does not border the edge of the puzzle
+	if (_edge_rules_inside_loop).size() == 0:
+		# get any line segment from the loop, and get the regions on both sides of it
+		var _first_line_index
+		var _line_is_vertical: bool = false
+		var _first_vertex: Vector2 = _get_coords_from_array_index(_vertex_array[0])
+		var _vx: int = _first_vertex.x
+		var _vy: int = _first_vertex.y * array_width
+		
+		if puzzle_array[_vx + _vy - 1].get_node("Rotation/Button")._get_state() == _color:
+			_first_line_index = _vx + _vy - 1
+		elif puzzle_array[_vx + _vy + 1].get_node("Rotation/Button")._get_state() == _color:
+			_first_line_index = _vx + _vy + 1
+		else:
+			_first_line_index = _vx + _vy - array_width
+			_line_is_vertical = true
+		
+		var _cell1
+		var _cell2
+		
+		if _line_is_vertical:
+			_cell1 = puzzle_array[_first_line_index - 1]
+			_cell2 = puzzle_array[_first_line_index + 1]
+		else:
+			_cell1 = puzzle_array[_first_line_index - array_width]
+			_cell2 = puzzle_array[_first_line_index + array_width]
+		
+		var _region1 = _get_region(_cell1._get_grid_x(), _cell1._get_grid_y(), _color)
+		var _region2 = _get_region(_cell2._get_grid_x(), _cell2._get_grid_y(), _color)
+		if (_region1.size() + _region2.size()) == (puzzle_width * puzzle_height):
+			return true
+	
+	# if the loop does border at least one edge of the puzzle
+	else:
+		var _tempx = _edge_rules_inside_loop[0]._get_grid_x()
+		var _tempy = _edge_rules_inside_loop[0]._get_grid_y()
+		var _region1: Array = _get_region(_tempx, _tempy, _color)
+		var _region2: Array = Array()
+		
+		for _cell in _edge_rules_outside_loop:
+			if _cell not in _region2:
+				_tempx = _cell._get_grid_x()
+				_tempy = _cell._get_grid_y()
+				_region2.append_array(_get_region(_tempx, _tempy, _color))
+		
+		if (_region1.size() + _region2.size()) == (puzzle_width * puzzle_height):
+			return true
+	
+	return false
 
 func _check_rule_nodes() -> bool:
 	for i in rule_array.size():
@@ -184,6 +293,10 @@ func _get_neighboring_line_count(_x: int, _y: int, _color: int) -> int:
 
 func _get_rule_index(_x: int, _y: int) -> int:
 	return (_x * 2) + 1 + (array_width * ((_y * 2) + 1))
+
+func _get_coords_from_array_index(_array_index: int) -> Vector2:
+	@warning_ignore("integer_division")
+	return Vector2(_array_index % array_width, _array_index / array_width)
 
 func _get_pip_count(_x: int, _y: int, _color: int) -> int:
 	var _count: int = 0

@@ -86,8 +86,8 @@ func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int =
 			%Sprite.modulate = Color.YELLOW
 			%TextLabel.modulate = Color.YELLOW
 	else:
-		%Sprite.modulate = Color.WHITE
-		%TextLabel.modulate = Color.WHITE
+		%Sprite.modulate = Color.LIGHT_GRAY
+		%TextLabel.modulate = Color.LIGHT_GRAY
 		color_id = ColorID.Black
 
 func _get_suit() -> int:
@@ -154,3 +154,9 @@ func _check_if_valid() -> bool:
 			return true
 	
 	return true
+
+func _get_grid_x() -> int:
+	return grid_x
+
+func _get_grid_y() -> int:
+	return grid_y
