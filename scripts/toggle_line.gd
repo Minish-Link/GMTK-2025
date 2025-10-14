@@ -14,12 +14,17 @@ func _enter_tree():
 	_set_color()
 
 var state: LineState
+var in_editor: bool = false
 
 func _on_Button_gui_input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
-				var _new_color: int = (get_node("../../../../..") as PuzzleGrid)._get_color()
+				var _new_color: int
+				if in_editor:
+					_new_color = (get_node("../../../../..") as LevelEditor)._get_color()
+				else:
+					_new_color = (get_node("../../../../..") as PuzzleGrid)._get_color()
 				if state == LineState.Pink:
 					state = _new_color as LineState
 				elif state == LineState.Red and _new_color == LineState.Blue:
@@ -30,19 +35,22 @@ func _on_Button_gui_input(event: InputEvent):
 					state = _new_color as LineState
 				else:
 					state = LineState.Blank
-				(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
+				if not in_editor:
+					(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
 			MOUSE_BUTTON_RIGHT:
 				if state == LineState.Erased:
 					state = LineState.Blank
 				else:
 					state = LineState.Erased
-				(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
+				if not in_editor:
+					(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
 			MOUSE_BUTTON_MIDDLE:
 				if state == LineState.Pink:
 					state = LineState.Blank
 				else:
 					state = LineState.Pink
-				(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
+				if not in_editor:
+					(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
 		_set_color()
 
 func _set_color():

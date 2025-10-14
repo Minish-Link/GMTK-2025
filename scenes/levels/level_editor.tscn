@@ -1,0 +1,494 @@
+[gd_scene load_steps=6 format=3 uid="uid://i0kysy43txab"]
+
+[ext_resource type="Script" uid="uid://rljmbg41lv1g" path="res://scripts/level_editor.gd" id="1_igg0e"]
+[ext_resource type="Texture2D" uid="uid://yt43yaknc5kr" path="res://textures/drawing_brush_large.svg" id="2_cxwhj"]
+[ext_resource type="PackedScene" uid="uid://cg4rspaeavpq7" path="res://scenes/objects/PuzzleRule.tscn" id="3_4psq0"]
+[ext_resource type="AudioStream" uid="uid://08j085cdg26k" path="res://audio/sfx/switch_002.ogg" id="4_syy28"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_syy28"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="LevelEditor" type="Control" node_paths=PackedStringArray("container")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_igg0e")
+container = NodePath("GridZoom/GridContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_left = -582.0
+offset_top = -335.0
+offset_right = 583.0
+offset_bottom = 333.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_syy28")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BrushSprite" type="Sprite2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(308, 87)
+scale = Vector2(2, 2)
+texture = ExtResource("2_cxwhj")
+
+[node name="LeftBorder" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -385.0
+offset_right = 272.0
+offset_bottom = 385.0
+grow_vertical = 2
+color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[node name="RightBorder" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -385.0
+offset_bottom = 385.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[node name="TopBorder" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -642.0
+offset_right = 642.0
+offset_bottom = 51.0
+grow_horizontal = 2
+color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[node name="BottomBorder" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -642.0
+offset_top = -51.0
+offset_right = 642.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[node name="LevelName" type="TextEdit" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -268.0
+offset_right = 268.0
+offset_bottom = 49.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Level Name Goes Here"
+
+[node name="FileName" type="TextEdit" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 315.0
+offset_top = 427.0
+offset_right = 562.0
+offset_bottom = 476.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+placeholder_text = "file_name_here"
+
+[node name="Description" type="TextEdit" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 312.0
+offset_top = 52.0
+offset_right = 562.0
+offset_bottom = 416.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 8
+placeholder_text = "Description goes here."
+wrap_mode = 1
+
+[node name="ResetBack" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -538.0
+offset_top = 448.0
+offset_right = -349.0
+offset_bottom = 508.0
+grow_horizontal = 2
+
+[node name="ResetButton" type="Button" parent="CanvasLayer/ResetBack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -26.0
+offset_right = 91.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Clear Grid"
+
+[node name="SaveBack" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 342.0
+offset_top = 483.0
+offset_right = 527.0
+offset_bottom = 544.0
+grow_horizontal = 2
+
+[node name="SaveButton" type="Button" parent="CanvasLayer/SaveBack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -26.5
+offset_right = 87.5
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Save"
+
+[node name="LoadBack" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 343.0
+offset_top = 553.0
+offset_right = 528.0
+offset_bottom = 614.0
+grow_horizontal = 2
+
+[node name="LoadButton" type="Button" parent="CanvasLayer/LoadBack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -26.5
+offset_right = 87.5
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Load"
+
+[node name="MenuBack" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_top = 518.0
+offset_right = -344.0
+offset_bottom = 625.0
+grow_horizontal = 2
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/MenuBack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -27.5
+offset_right = 95.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Back to
+Level Select"
+
+[node name="RulePickerBack" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -557.0
+offset_top = 145.0
+offset_right = -325.0
+offset_bottom = 263.0
+grow_horizontal = 2
+
+[node name="TypeLabel" type="RichTextLabel" parent="CanvasLayer/RulePickerBack"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 227.0
+offset_bottom = 45.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "Type"
+horizontal_alignment = 1
+
+[node name="TypeLeft" type="Button" parent="CanvasLayer/RulePickerBack/TypeLabel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 27.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "<"
+
+[node name="TypeRight" type="Button" parent="CanvasLayer/RulePickerBack/TypeLabel"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 5.0
+offset_right = 213.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = ">"
+
+[node name="VariantLabel" type="RichTextLabel" parent="CanvasLayer/RulePickerBack"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 41.0
+offset_right = 227.0
+offset_bottom = 85.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "Variant"
+horizontal_alignment = 1
+
+[node name="VariantLeft" type="Button" parent="CanvasLayer/RulePickerBack/VariantLabel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 27.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "<"
+
+[node name="VariantRight" type="Button" parent="CanvasLayer/RulePickerBack/VariantLabel"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 5.0
+offset_right = 213.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = ">"
+
+[node name="ColorLabel" type="RichTextLabel" parent="CanvasLayer/RulePickerBack"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 77.0
+offset_right = 227.0
+offset_bottom = 121.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "Color"
+horizontal_alignment = 1
+
+[node name="ColorLeft" type="Button" parent="CanvasLayer/RulePickerBack/ColorLabel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 27.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "<"
+
+[node name="ColorRight" type="Button" parent="CanvasLayer/RulePickerBack/ColorLabel"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 5.0
+offset_right = 213.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = ">"
+
+[node name="RulePickerBack" type="ColorRect" parent="CanvasLayer/RulePickerBack"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.0
+offset_top = 135.0
+offset_right = 117.0
+offset_bottom = 293.0
+grow_horizontal = 2
+
+[node name="DimensionLabel" type="RichTextLabel" parent="CanvasLayer/RulePickerBack/RulePickerBack"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = -7.0
+offset_right = 227.0
+offset_bottom = 37.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "4 x 4"
+horizontal_alignment = 1
+
+[node name="WidthLabel" type="RichTextLabel" parent="CanvasLayer/RulePickerBack/RulePickerBack"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 28.0
+offset_right = 227.0
+offset_bottom = 72.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "Width"
+horizontal_alignment = 1
+
+[node name="WidthLeft" type="Button" parent="CanvasLayer/RulePickerBack/RulePickerBack/WidthLabel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 28.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "<"
+
+[node name="WidthRight" type="Button" parent="CanvasLayer/RulePickerBack/RulePickerBack/WidthLabel"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 5.0
+offset_right = 213.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = ">"
+
+[node name="HeightLabel" type="RichTextLabel" parent="CanvasLayer/RulePickerBack/RulePickerBack"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 66.0
+offset_right = 227.0
+offset_bottom = 110.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "Height"
+horizontal_alignment = 1
+
+[node name="HeightLeft" type="Button" parent="CanvasLayer/RulePickerBack/RulePickerBack/HeightLabel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 27.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "<"
+
+[node name="HeightRight" type="Button" parent="CanvasLayer/RulePickerBack/RulePickerBack/HeightLabel"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 5.0
+offset_right = 213.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = ">"
+
+[node name="ColorLimitLabel" type="RichTextLabel" parent="CanvasLayer/RulePickerBack/RulePickerBack"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = 107.0
+offset_right = 227.0
+offset_bottom = 151.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "Colors: 1"
+horizontal_alignment = 1
+
+[node name="HeightLeft" type="Button" parent="CanvasLayer/RulePickerBack/RulePickerBack/ColorLimitLabel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 27.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "<"
+
+[node name="HeightRight" type="Button" parent="CanvasLayer/RulePickerBack/RulePickerBack/ColorLimitLabel"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 5.0
+offset_right = 213.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = ">"
+
+[node name="RulePreviewBack" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 66.0
+offset_top = -319.0
+offset_right = 191.0
+offset_bottom = -191.0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RulePreview" parent="CanvasLayer/RulePreviewBack" instance=ExtResource("3_4psq0")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridZoom" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="GridContainer" type="GridContainer" parent="GridZoom"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+
+[node name="SwapSFXPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_syy28")
+volume_db = -10.0
+bus = &"SFX"
+
+[connection signal="pressed" from="CanvasLayer/ResetBack/ResetButton" to="." method="_clear_grid"]
+[connection signal="pressed" from="CanvasLayer/SaveBack/SaveButton" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="CanvasLayer/LoadBack/LoadButton" to="." method="_load_board_from_json"]
+[connection signal="pressed" from="CanvasLayer/MenuBack/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/TypeLabel/TypeLeft" to="." method="_on_rule_type_left_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/TypeLabel/TypeRight" to="." method="_on_rule_type_right_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/VariantLabel/VariantLeft" to="." method="_on_rule_variant_decrease_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/VariantLabel/VariantRight" to="." method="_on_rule_variant_increase_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/ColorLabel/ColorLeft" to="." method="_on_rule_color_left_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/ColorLabel/ColorRight" to="." method="_on_rule_color_right_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/RulePickerBack/WidthLabel/WidthLeft" to="." method="_on_board_width_decrease_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/RulePickerBack/WidthLabel/WidthRight" to="." method="_on_board_width_increase_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/RulePickerBack/HeightLabel/HeightLeft" to="." method="_on_board_height_decrease_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/RulePickerBack/HeightLabel/HeightRight" to="." method="_on_board_height_increase_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/RulePickerBack/ColorLimitLabel/HeightLeft" to="." method="_on_board_color_count_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/RulePickerBack/ColorLimitLabel/HeightRight" to="." method="_on_board_color_count_pressed"]

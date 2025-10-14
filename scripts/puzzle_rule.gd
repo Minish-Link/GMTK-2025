@@ -33,7 +33,12 @@ func _set_grid_xy(_x: int, _y: int):
 func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int = 0):
 	rule = _rule
 	rule_number = _rule_number
-	if rule == "pips":
+	if rule == "":
+		%Sprite.visible = false
+		%TextLabel.visible = false
+	elif rule == "pips":
+		%TextLabel.visible = false
+		%Sprite.visible = true
 		match rule_number:
 			0:
 				%Sprite.texture = load("res://textures/dice_empty.svg")
@@ -50,6 +55,8 @@ func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int =
 				rule = ""
 				rule_number = 0
 	elif rule == "suit":
+		%TextLabel.visible = false
+		%Sprite.visible = true
 		match rule_number:
 			0:
 				%Sprite.texture = load("res://textures/suit_hearts.svg")
@@ -64,6 +71,8 @@ func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int =
 				rule = ""
 				rule_number = 0
 	elif rule == "area":
+		%TextLabel.visible = true
+		%Sprite.visible = false
 		%TextLabel.text = str(rule_number)
 			
 	if (_color == "red"):

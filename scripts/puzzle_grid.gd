@@ -109,7 +109,7 @@ func _create_grid(_width: int, _height: int):
 	print("Making Puzzle")
 	
 	puzzle_array = Array()
-	var columns = (_width * 2) + 1
+	var columns: int = (_width * 2) + 1
 	var rows: int = (_height * 2) + 1
 	puzzle_array.resize(columns * rows)
 	rule_array.resize(_width * _height)

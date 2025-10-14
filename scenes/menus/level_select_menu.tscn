@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1ndctqe31qkx"]
+[gd_scene load_steps=6 format=3 uid="uid://d1ndctqe31qkx"]
 
 [ext_resource type="Script" uid="uid://c6iyhhgbch1oh" path="res://scenes/menus/level_select_menu.gd" id="1_v6kjm"]
 [ext_resource type="PackedScene" uid="uid://3xtj1kbrex43" path="res://scenes/objects/level_select_button.tscn" id="2_dm02g"]
+[ext_resource type="Script" uid="uid://b4yms5nas3fnh" path="res://scripts/editor_button.gd" id="3_tbwtj"]
 
 [sub_resource type="Gradient" id="Gradient_dm02g"]
 colors = PackedColorArray(1, 0, 0, 0.498039, 0, 0, 1, 0.498039)
@@ -272,9 +273,16 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Back to Main Menu"
 
+[node name="EditorButton" type="Button" parent="LevelSelectCanvasLayer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Level Editor"
+script = ExtResource("3_tbwtj")
+
 [connection signal="Reset" from="." to="." method="_on_reset"]
 [connection signal="pressed" from="LevelSelectCanvasLayer/ResetCompletionButton" to="." method="_on_reset_completion_button_pressed"]
 [connection signal="popup_hide" from="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup" to="." method="_on_confirmation_popup_popup_hide"]
 [connection signal="pressed" from="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer/AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer/DenyButton" to="." method="_on_deny_button_pressed"]
 [connection signal="pressed" from="LevelSelectCanvasLayer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="LevelSelectCanvasLayer/EditorButton" to="." method="_on_editor_button_pressed"]

@@ -69,3 +69,9 @@ func _on_reset(answer: bool) -> void:
 		completion_data = []
 		var completion_file = FileAccess.open("user://completion.json", FileAccess.WRITE)
 		completion_file.store_string("[]")
+
+
+func _on_editor_button_pressed() -> void:
+	var _puzzle_scene = load("res://scenes/levels/level_editor.tscn").instantiate()
+	get_node("LevelSelectCanvasLayer").hide()
+	get_node("LevelCanvasLayer").add_child(_puzzle_scene)
