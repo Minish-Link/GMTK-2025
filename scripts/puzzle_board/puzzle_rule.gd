@@ -35,20 +35,18 @@ func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int =
 	rule = _rule
 	color_name = _color
 	rule_number = _rule_number
+	%Sprite.visible = true
 	%Sprite.scale = Vector2(0.75,0.75)
 	%TextLabel.add_theme_font_size_override("normal_font_size", 32)
 	%TextLabel.add_theme_constant_override("outline_size", 0)
 	if rule == "pips":
 		%TextLabel.visible = false
-		%Sprite.visible = true
 		%Sprite.texture = load("res://textures/cell_rules/dice/dice_"+str(rule_number)+".svg")
 	elif rule == "suit":
 		%TextLabel.visible = false
-		%Sprite.visible = true
 		%Sprite.texture = load("res://textures/cell_rules/suits/suit_"+str(rule_number)+".svg")
 	elif rule == "area":
 		%TextLabel.visible = true
-		%Sprite.visible = true
 		%Sprite.texture = load("res://textures/cell_rules/area.png")
 		%TextLabel.text = str(rule_number)
 		if rule_number >= 10:
@@ -56,19 +54,15 @@ func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int =
 		%Sprite.scale = Vector2(1.1, 1.1)
 	elif rule == "eye":
 		%TextLabel.visible = false
-		%Sprite.visible = true
 		%Sprite.texture = load("res://textures/cell_rules/eyes/eye_"+str(rule_number)+".png")
 	elif rule == "triangle":
 		%TextLabel.visible = false
-		%Sprite.visible = true
 		%Sprite.texture = load("res://textures/cell_rules/triangles/triangle_"+str(rule_number)+".png")
 	elif rule == "cross":
 		%TextLabel.visible = false
-		%Sprite.visible = true
 		%Sprite.texture = load("res://textures/cell_rules/crosses/cross_"+str(rule_number)+".png")
 	elif rule == "arrows":
 		%TextLabel.visible = true
-		%Sprite.visible = true
 		%Sprite.texture = load("res://textures/cell_rules/arrows.png")
 		%TextLabel.text = str(rule_number)
 		%Sprite.scale = Vector2(1.2, 1.2)
@@ -77,6 +71,9 @@ func _set_rule(_rule: String = "", _color: String = "black", _rule_number: int =
 			%TextLabel.add_theme_font_size_override("normal_font_size", 18)
 		else:
 			%TextLabel.add_theme_font_size_override("normal_font_size", 22)
+	elif rule == "key":
+		%TextLabel.visible = false
+		%Sprite.texture = load("res://textures/cell_rules/keys/key_"+str(rule_number)+".png")
 			
 	else: # "" or invalid
 		%Sprite.visible = false
@@ -120,8 +117,12 @@ func _get_crosses() -> int:
 		return -1
 
 func _check_if_valid() -> bool:
+	if color_id == 1: # purple
+		return _check_purple_rule()
+		
 	if rule == "":
 		return true
+		
 	elif rule == "pips":
 		if (color_id == 0): # Black
 			var _red: int = (get_node("../../..") as PuzzleGrid)._get_pip_count(grid_x, grid_y, 2)
@@ -132,13 +133,6 @@ func _check_if_valid() -> bool:
 				print(str("failure!"))
 				print(str(grid_x)+","+str(grid_y)+": "+str(_red + _blue))
 				return false
-		elif (color_id == 1): # Purple
-			var _red: int = (get_node("../../..") as PuzzleGrid)._get_pip_count(grid_x, grid_y, 2)
-			var _blue: int = (get_node("../../..") as PuzzleGrid)._get_pip_count(grid_x, grid_y, 3)
-			if _red == rule_number and _blue == rule_number:
-				return true
-			else:
-				return false
 		else: # Red or Blue
 			if (get_node("../../..") as PuzzleGrid)._get_pip_count(grid_x, grid_y, color_id) == rule_number:
 				return true
@@ -146,86 +140,68 @@ func _check_if_valid() -> bool:
 				return false
 	
 	elif rule == "area":
-		if color_id == 1: # Purple
-			if (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, 2).size() == rule_number:
-				if (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, 3).size() == rule_number:
-					return true
-			return false
+		if (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, color_id).size() == rule_number:
+			return true
 		else:
-			if (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, color_id).size() == rule_number:
-				return true
-			else:
-				return false
+			return false
 				
 	elif rule == "suit":
-		if (color_id == 1): # Purple
-			var _region = (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, 2)
-			for i in _region.size():
-				var _other_suit: int = (_region[i] as PuzzleRule)._get_suit()
-				if _other_suit >= 0 and _other_suit != rule_number:
-					return false
-			_region = (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, 3)
-			for i in _region.size():
-				var _other_suit: int = (_region[i] as PuzzleRule)._get_suit()
-				if _other_suit >= 0 and _other_suit != rule_number:
-					return false
-		
-		else:
-			var _region = (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, color_id)
-			for i in _region.size():
-				var _other_suit: int = (_region[i] as PuzzleRule)._get_suit()
-				if _other_suit >= 0 and _other_suit != rule_number:
-					return false
+		var _region = (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, color_id)
+		for i in _region.size():
+			var _other_suit: int = (_region[i] as PuzzleRule)._get_suit()
+			if _other_suit >= 0 and _other_suit != rule_number:
+				return false
 		
 	elif rule == "triangle":
-		if color_id == 1:
-			if (get_node("../../..") as PuzzleGrid)._get_neighboring_vertices(grid_x, grid_y, 2) != rule_number:
-				return false
-			if (get_node("../../..") as PuzzleGrid)._get_neighboring_vertices(grid_x, grid_y, 3) != rule_number:
-				return false
-		else:
-			if (get_node("../../..") as PuzzleGrid)._get_neighboring_vertices(grid_x, grid_y, color_id) != rule_number:
-				return false
+		if (get_node("../../..") as PuzzleGrid)._get_neighboring_vertices(grid_x, grid_y, color_id) != rule_number:
+			return false
 		
 	elif rule == "cross":
-		if color_id == 1: # purple
-			for i in range(2,4):
-				var _cross_count: int = 0
-				var _region = (get_node("../../..") as PuzzleRule)._get_region(grid_x, grid_y, i)
-				for _cell in _region:
-					var _other_cross: int = (_cell as PuzzleRule)._get_crosses()
-					if _other_cross >= 0:
-						if _other_cross != rule_number:
-							return false
-						else:
-							_cross_count += 1
-				if _cross_count != rule_number:
+		var _cross_count: int = 0
+		var _region = (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, color_id)
+		for _cell in _region:
+			var _other_cross: int = (_cell as PuzzleRule)._get_crosses()
+			if _other_cross >= 0:
+				if _other_cross != rule_number:
 					return false
-		else:
-			var _cross_count: int = 0
-			var _region = (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, color_id)
-			for _cell in _region:
-				var _other_cross: int = (_cell as PuzzleRule)._get_crosses()
-				if _other_cross >= 0:
-					if _other_cross != rule_number:
-						return false
-					else:
-						_cross_count += 1
-			if _cross_count != rule_number:
-				return false
+				else:
+					_cross_count += 1
+		if _cross_count != rule_number:
+			return false
 		
 	elif rule == "arrows":
-		if color_id == 1: # purple
-			if (get_node("../../..") as PuzzleGrid)._get_arrows_count(grid_x, grid_y, 2) != rule_number:
+		if (get_node("../../..") as PuzzleGrid)._get_arrows_count(grid_x, grid_y, color_id) != rule_number:
+			return false
+	
+	elif rule == "key":
+		var _region = (get_node("../../..") as PuzzleGrid)._get_region(grid_x, grid_y, color_id)
+		var _key_count: int = 0
+		var _key_sum: int = 0
+		for _cell in _region:
+			if (_cell as PuzzleRule).rule == "":
+				continue
+			if (_cell as PuzzleRule).rule != "key":
 				return false
-			if (get_node("../../..") as PuzzleGrid)._get_arrows_count(grid_x, grid_y, 3) != rule_number:
-				return false
-		else:
-			if (get_node("../../..") as PuzzleGrid)._get_arrows_count(grid_x, grid_y, color_id) != rule_number:
-				return false
-		pass
+			else:
+				_key_count += 1
+				_key_sum += (_cell as PuzzleRule).rule_number
+				if _key_count > 2:
+					return false
+		if _key_sum != 7:
+			return false
 	
 	return true
+
+func _check_purple_rule() -> bool:
+	var _success: bool
+	var _og_color: int = color_id
+	color_id = 2
+	_success = _check_if_valid()
+	if _success:
+		color_id = 3
+		_success = _check_if_valid()
+	color_id = _og_color
+	return _success
 
 func _get_grid_x() -> int:
 	return grid_x

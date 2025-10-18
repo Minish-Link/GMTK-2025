@@ -167,9 +167,15 @@ func _check_loops() -> bool:
 	if color_count > 1 and not _is_loop_color_valid(3):
 		print("Blue Loop is not valid")
 		return false
+	var _erased_lines: Array[Vector3]
+	if not _are_eyes_valid(_erased_lines):
+		_restore_erased_lines(_erased_lines)
+		return false
 	if not _check_rule_nodes():
+		_restore_erased_lines(_erased_lines)
 		return false
 	
+	_restore_erased_lines(_erased_lines)
 	return true
 
 func _is_loop_color_valid(_color: int) -> bool:
@@ -295,10 +301,48 @@ func _get_arrows_count(_x: int, _y: int, _color: int) -> int:
 	
 	return _count
 
-func _erase_line_from_eye(_x: int, _y: int, _dir: int, _color: int) -> bool:
+func _are_eyes_valid(_erased_lines: Array[Vector3]) -> bool:
+	for _x in range(1, array_width, 2):
+		for _y in range(1, array_height, 2):
+			var _cell := (puzzle_array[_x][_y] as PuzzleRule)
+			if _cell.rule != "eye":
+				continue
+			if _cell.color_id == 1: # Purple
+				if not _erase_line_from_eye(_x, _y, _cell.rule_number, 2, _erased_lines):
+					return false
+				if not _erase_line_from_eye(_x, _y, _cell.rule_number, 3, _erased_lines):
+					return false
+			elif not _erase_line_from_eye(_x, _y, _cell.rule_number, _cell.color_id, _erased_lines):
+				return false
+	return true
+
+func _erase_line_from_eye(_x: int, _y: int, _dir: int, _color: int, _erased_lines: Array[Vector3]) -> bool:
 	# returns true if a line was erased, or false if none were erased
-	# TODO
-	return false
+	_x += CARDINAL_DIRECTIONS[_dir].x
+	_y += CARDINAL_DIRECTIONS[_dir].y
+	var _line_state: int
+	var _did_erase_line: bool = false
+	
+	while _x >= 0 and _x <= array_width - 1 and _y >= 0 and _y <= array_height:
+		_line_state = (puzzle_array[_x][_y].get_node("Rotation/Button") as PuzzleLine)._get_state()
+		if _color == 0: # Black
+			if _line_state >= 2:
+				_did_erase_line = true
+		elif _color == _line_state:
+			_did_erase_line = true
+		if _did_erase_line == true:
+			_erased_lines.append(Vector3(_x,_y, _line_state))
+			(puzzle_array[_x][_y].get_node("Rotation/Button") as PuzzleLine)._set_state(0)
+			print("erased line at "+str(_x)+","+str(_y))
+			break
+		_x += CARDINAL_DIRECTIONS[_dir].x * 2
+		_y += CARDINAL_DIRECTIONS[_dir].y * 2
+	
+	return _did_erase_line
+
+func _restore_erased_lines(_erased_lines: Array[Vector3]) -> void:
+	for _line in _erased_lines:
+		(puzzle_array[_line.x][_line.y].get_node("Rotation/Button") as PuzzleLine)._set_state(_line.z)
 
 func _get_pip_count(_x: int, _y: int, _color: int) -> int:
 	var _count: int = 0

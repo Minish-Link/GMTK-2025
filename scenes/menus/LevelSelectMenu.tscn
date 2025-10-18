@@ -73,7 +73,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "01"
-level_path = "res://level_data/final/1.json"
+level_path = "res://level_data/editor/jimmy_johns.json"
 
 [node name="02Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
 layout_mode = 2
@@ -81,7 +81,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "02"
-level_path = "res://level_data/final/2.json"
+level_path = "res://level_data/editor/jimmy_johns2.json"
 
 [node name="03Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
 layout_mode = 2
@@ -89,7 +89,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "03"
-level_path = "res://level_data/final/3.json"
+level_path = "res://level_data/editor/keys.json"
 
 [node name="04Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
 layout_mode = 2
