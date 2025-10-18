@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d06q0wju6vptk"]
+
+[ext_resource type="PackedScene" uid="uid://dxn3wnwixyb2g" path="res://scenes/levels/LevelEditor.tscn" id="1_c6lyq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcney"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="MainEditorScene" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jcney")
+
+[node name="PuzzleGrid" parent="." instance=ExtResource("1_c6lyq")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4

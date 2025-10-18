@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqs3j2vp1ugo5"]
 
-[ext_resource type="Script" uid="uid://cblopaseo7ysj" path="res://scripts/toggle_line.gd" id="1_ohmyq"]
+[ext_resource type="Script" uid="uid://cblopaseo7ysj" path="res://scripts/puzzle_board/toggle_line.gd" id="1_ohmyq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ohmyq"]
 particles_animation = true

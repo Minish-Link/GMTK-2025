@@ -1,17 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://cf8gxpsxyprch"]
+[gd_scene load_steps=3 format=3 uid="uid://cn600e3l2k68m"]
 
 [ext_resource type="PackedScene" uid="uid://cg4rspaeavpq7" path="res://scenes/objects/PuzzleRule.tscn" id="1_hprxi"]
-[ext_resource type="Script" uid="uid://dsmdloydq4mlo" path="res://scripts/editor_rule.gd" id="2_a8bek"]
+[ext_resource type="Script" uid="uid://dsmdloydq4mlo" path="res://scripts/puzzle_board/editor_rule.gd" id="2_a8bek"]
 
-[node name="EditorRule" instance=ExtResource("1_hprxi")]
+[node name="PuzzleRule" instance=ExtResource("1_hprxi")]
 script = ExtResource("2_a8bek")
 
 [node name="Button" type="Button" parent="." index="2"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -32.0
 offset_top = -32.0
 offset_right = 32.0
 offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]

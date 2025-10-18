@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cg4rspaeavpq7"]
 
-[ext_resource type="Script" uid="uid://dnhi3o4u7eu1e" path="res://scripts/puzzle_rule.gd" id="1_vmg1r"]
+[ext_resource type="Script" uid="uid://dnhi3o4u7eu1e" path="res://scripts/puzzle_board/puzzle_rule.gd" id="1_vmg1r"]
 [ext_resource type="FontFile" uid="uid://b8bn3rlf6stxr" path="res://fonts/ChunkFive-Regular.otf" id="2_8s5jd"]
 
 [node name="PuzzleRule" type="Control"]

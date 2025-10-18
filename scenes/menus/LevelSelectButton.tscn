@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://3xtj1kbrex43"]
+
+[ext_resource type="Script" uid="uid://byftnrxmr1vvx" path="res://scripts/menus/level_select_button.gd" id="1_o7yn1"]
+[ext_resource type="AudioStream" uid="uid://deuh1yudv3m17" path="res://audio/sfx/GMTK2025_Click2.ogg" id="2_5ptho"]
+
+[node name="LevelSelectButton" type="Button"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o7yn1")
+
+[node name="ClickAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_5ptho")
+volume_db = 10.0
+bus = &"SFX"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
