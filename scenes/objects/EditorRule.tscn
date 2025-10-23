@@ -6,7 +6,7 @@
 [node name="PuzzleRule" instance=ExtResource("1_hprxi")]
 script = ExtResource("2_a8bek")
 
-[node name="Button" type="Button" parent="." index="2"]
+[node name="Button" type="Button" parent="." index="1"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8

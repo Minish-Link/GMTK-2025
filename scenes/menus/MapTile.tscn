@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdxlr7fu2myau"]
+
+[ext_resource type="Script" uid="uid://cd3v3gkhb6mip" path="res://scripts/menus/map_tile.gd" id="1_qu3gs"]
+[ext_resource type="FontFile" uid="uid://b8bn3rlf6stxr" path="res://fonts/ChunkFive-Regular.otf" id="2_o0fvh"]
+
+[node name="MapTile" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qu3gs")
+
+[node name="UpPath" type="Line2D" parent="."]
+visible = false
+rotation = -1.5708
+points = PackedVector2Array(0, 0, 32, 0)
+joint_mode = 2
+begin_cap_mode = 2
+
+[node name="RightPath" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 32, 0)
+joint_mode = 2
+begin_cap_mode = 2
+
+[node name="DownPath" type="Line2D" parent="."]
+visible = false
+rotation = 1.5708
+points = PackedVector2Array(0, 0, 32, 0)
+joint_mode = 2
+begin_cap_mode = 2
+
+[node name="LeftPath" type="Line2D" parent="."]
+visible = false
+rotation = 3.14159
+points = PackedVector2Array(0, 0, 32, 0)
+joint_mode = 2
+begin_cap_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_o0fvh")
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

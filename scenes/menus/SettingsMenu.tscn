@@ -218,7 +218,7 @@ popup/item_0/text = "None"
 popup/item_0/id = 3
 popup/item_1/text = "Protanopia / Deuteranopia"
 popup/item_1/id = 0
-popup/item_2/text = "Tritanpoia"
+popup/item_2/text = "Tritanopia"
 popup/item_2/id = 2
 
 [node name="ResetButton" type="Button" parent="PanelContainer/ScrollContainer/MarginContainer/SettingsContainer"]

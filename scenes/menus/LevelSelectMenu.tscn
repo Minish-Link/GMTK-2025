@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d1ndctqe31qkx"]
 
 [ext_resource type="Script" uid="uid://c6iyhhgbch1oh" path="res://scripts/menus/level_select_menu.gd" id="1_n20np"]
-[ext_resource type="PackedScene" uid="uid://3xtj1kbrex43" path="res://scenes/menus/LevelSelectButton.tscn" id="2_rucja"]
+[ext_resource type="PackedScene" uid="uid://cfhwqlcjk0p70" path="res://scenes/menus/LevelMap.tscn" id="2_y5q4b"]
 
 [sub_resource type="Gradient" id="Gradient_dm02g"]
 colors = PackedColorArray(1, 0, 0, 0.498039, 0, 0, 1, 0.498039)
@@ -26,261 +26,64 @@ texture = SubResource("GradientTexture2D_tbwtj")
 
 [node name="LevelCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="LevelSelectCanvasLayer" type="VBoxContainer" parent="."]
+[node name="LevelSelectCanvasLayer" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_constants/separation = 100
+alignment = 1
 
-[node name="ResetCompletionButton" type="Button" parent="LevelSelectCanvasLayer"]
+[node name="LevelMap" parent="LevelSelectCanvasLayer" instance=ExtResource("2_y5q4b")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelectCanvasLayer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ResetCompletionButton" type="Button" parent="LevelSelectCanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Reset Completion Progress"
 
-[node name="ConfirmationPopup" type="PopupPanel" parent="LevelSelectCanvasLayer/ResetCompletionButton"]
+[node name="ConfirmationPopup" type="PopupPanel" parent="LevelSelectCanvasLayer/VBoxContainer/ResetCompletionButton"]
 unique_name_in_owner = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelectCanvasLayer/VBoxContainer/ResetCompletionButton/ConfirmationPopup"]
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 388.0
 offset_bottom = 97.0
 
-[node name="InfoLabel" type="Label" parent="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer"]
+[node name="InfoLabel" type="Label" parent="LevelSelectCanvasLayer/VBoxContainer/ResetCompletionButton/ConfirmationPopup/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "This resets all Completion Progress! Are you sure?"
 
-[node name="AcceptButton" type="Button" parent="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer"]
+[node name="AcceptButton" type="Button" parent="LevelSelectCanvasLayer/VBoxContainer/ResetCompletionButton/ConfirmationPopup/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Yes"
 
-[node name="DenyButton" type="Button" parent="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer"]
+[node name="DenyButton" type="Button" parent="LevelSelectCanvasLayer/VBoxContainer/ResetCompletionButton/ConfirmationPopup/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "No"
 
-[node name="LevelGrid" type="GridContainer" parent="LevelSelectCanvasLayer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 5
-
-[node name="01Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "01"
-level_path = "res://level_data/editor/jimmy_johns.json"
-
-[node name="02Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "02"
-level_path = "res://level_data/editor/jimmy_johns2.json"
-
-[node name="03Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "03"
-level_path = "res://level_data/editor/keys.json"
-
-[node name="04Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "04"
-level_path = "res://level_data/final/4.json"
-
-[node name="05Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "05"
-level_path = "res://level_data/final/5.json"
-
-[node name="06Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "06"
-level_path = "res://level_data/final/6.json"
-
-[node name="07Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "07"
-level_path = "res://level_data/final/7.json"
-
-[node name="08Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "08"
-level_path = "res://level_data/final/8.json"
-
-[node name="09Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "09"
-level_path = "res://level_data/final/9.json"
-
-[node name="10Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "10"
-level_path = "res://level_data/final/10.json"
-
-[node name="11Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "11"
-level_path = "res://level_data/final/11.json"
-
-[node name="12Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "12"
-level_path = "res://level_data/final/12.json"
-
-[node name="13Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "13"
-level_path = "res://level_data/final/13.json"
-
-[node name="14Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "14"
-level_path = "res://level_data/final/14.json"
-
-[node name="15Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "15"
-level_path = "res://level_data/final/15.json"
-
-[node name="16Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "16"
-level_path = "res://level_data/editor/cross_01.json"
-
-[node name="17Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "17"
-level_path = "res://level_data/editor/cross_02.json"
-
-[node name="18Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "18"
-level_path = "res://level_data/editor/cross_03.json"
-
-[node name="19Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "19"
-level_path = "res://level_data/editor/cross_04.json"
-
-[node name="20Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "20"
-level_path = "res://level_data/editor/cross_05.json"
-
-[node name="21Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "21"
-level_path = "res://level_data/editor/cross_06.json"
-
-[node name="22Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "22"
-level_path = "res://level_data/editor/triangle_02.json"
-
-[node name="23Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "23"
-level_path = "res://level_data/editor/tutorial/arrows/01.json"
-
-[node name="24Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "24"
-level_path = "res://level_data/editor/tutorial/arrows/02.json"
-
-[node name="25Button" parent="LevelSelectCanvasLayer/LevelGrid" instance=ExtResource("2_rucja")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "25"
-level_path = "res://level_data/editor/tutorial/arrows/03.json"
-
-[node name="BackButton" type="Button" parent="LevelSelectCanvasLayer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Back to Main Menu"
-
-[node name="EditorButton" type="Button" parent="LevelSelectCanvasLayer"]
+[node name="EditorButton" type="Button" parent="LevelSelectCanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Level Editor"
 
+[node name="BackButton" type="Button" parent="LevelSelectCanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to Main Menu"
+
 [connection signal="Reset" from="." to="." method="_on_reset"]
-[connection signal="pressed" from="LevelSelectCanvasLayer/ResetCompletionButton" to="." method="_on_reset_completion_button_pressed"]
-[connection signal="popup_hide" from="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup" to="." method="_on_confirmation_popup_popup_hide"]
-[connection signal="pressed" from="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer/AcceptButton" to="." method="_on_accept_button_pressed"]
-[connection signal="pressed" from="LevelSelectCanvasLayer/ResetCompletionButton/ConfirmationPopup/VBoxContainer/DenyButton" to="." method="_on_deny_button_pressed"]
-[connection signal="pressed" from="LevelSelectCanvasLayer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="LevelSelectCanvasLayer/EditorButton" to="." method="_on_editor_button_pressed"]
+[connection signal="pressed" from="LevelSelectCanvasLayer/VBoxContainer/ResetCompletionButton" to="." method="_on_reset_completion_button_pressed"]
+[connection signal="popup_hide" from="LevelSelectCanvasLayer/VBoxContainer/ResetCompletionButton/ConfirmationPopup" to="." method="_on_confirmation_popup_popup_hide"]
+[connection signal="pressed" from="LevelSelectCanvasLayer/VBoxContainer/ResetCompletionButton/ConfirmationPopup/VBoxContainer/AcceptButton" to="." method="_on_accept_button_pressed"]
+[connection signal="pressed" from="LevelSelectCanvasLayer/VBoxContainer/ResetCompletionButton/ConfirmationPopup/VBoxContainer/DenyButton" to="." method="_on_deny_button_pressed"]
+[connection signal="pressed" from="LevelSelectCanvasLayer/VBoxContainer/EditorButton" to="." method="_on_editor_button_pressed"]
+[connection signal="pressed" from="LevelSelectCanvasLayer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

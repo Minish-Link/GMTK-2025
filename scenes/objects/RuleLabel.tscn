@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4v03j000y4d4"]
+
+[ext_resource type="Script" uid="uid://g6jk6benqt1d" path="res://scripts/puzzle_board/rule_label.gd" id="1_e2rui"]
+
+[sub_resource type="Curve" id="Curve_c3ob6"]
+_data = [Vector2(0.42233, 0.0224719), 0.0, 0.126251, 0, 0, Vector2(0.834951, 0.730337), -3.85768, -3.85768, 0, 0, Vector2(1, 0), -0.0984939, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_x2jve"]
+curve = SubResource("Curve_c3ob6")
+
+[sub_resource type="Curve" id="Curve_daq4u"]
+_data = [Vector2(0, 0.269663), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.99537, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qtmqj"]
+curve = SubResource("Curve_daq4u")
+
+[sub_resource type="Curve" id="Curve_e2rui"]
+_limits = [0.0, 30.0, 0.0, 3.0]
+_data = [Vector2(0, 30), 0.0, 35.9163, 0, 0, Vector2(2.97087, 5.39326), -1.33535, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t66su"]
+curve = SubResource("Curve_e2rui")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t1xlc"]
+lifetime_randomness = 0.1
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+velocity_limit_curve = SubResource("CurveTexture_t66su")
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 15.0
+scale_curve = SubResource("CurveTexture_qtmqj")
+color = Color(1, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_x2jve")
+
+[node name="RuleLabel" type="Control"]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_e2rui")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+
+[node name="TextLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -31.0
+offset_right = 31.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubscriptLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 32
+autowrap_mode = 2
+horizontal_alignment = 2
+vertical_alignment = 2
+text_direction = 1
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 16
+lifetime = 2.5
+preprocess = 2.0
+process_material = SubResource("ParticleProcessMaterial_t1xlc")

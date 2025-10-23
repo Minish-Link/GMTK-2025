@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5no3ni8hqhtd"
-path="res://.godot/imported/arrows.png-dea46c32ead4b46937ab0efbd1553b8a.ctex"
+uid="uid://cdqgfflpfiotn"
+path="res://.godot/imported/bishop.png-798d914993f0589013a584b6a1b23805.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/cell_rules/arrows.png"
-dest_files=["res://.godot/imported/arrows.png-dea46c32ead4b46937ab0efbd1553b8a.ctex"]
+source_file="res://textures/cell_rules/chess/bishop.png"
+dest_files=["res://.godot/imported/bishop.png-798d914993f0589013a584b6a1b23805.ctex"]
 
 [params]
 

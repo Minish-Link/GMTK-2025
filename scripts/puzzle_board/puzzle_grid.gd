@@ -35,6 +35,7 @@ var prev_level: String
 var played_victory: bool = false
 
 var colorblind_setting
+var in_editor: bool = false
 
 const CARDINAL_DIRECTIONS: Array[Vector2] = [
 	Vector2(0,-1),# up
@@ -47,6 +48,16 @@ const ORDINAL_DIRECTIONS: Array[Vector2] = [
 	Vector2(1,1), # SE
 	Vector2(-1,1),# SW
 	Vector2(-1,-1)# NW
+]
+const KNIGHT_DIRECTIONS: Array[Vector2] = [
+	Vector2(1,-2), # Up Right
+	Vector2(2,-1), # Right Up
+	Vector2(2,1),  # Right Down
+	Vector2(1,2),  # Down Right
+	Vector2(-1,2), # Down Left
+	Vector2(-2,1), # Left Down
+	Vector2(-2,-1),# Left Up
+	Vector2(-1,-2) # Up Left
 ]
 
 func _init() -> void:
@@ -118,8 +129,13 @@ func _accept_level_data(_data: Dictionary):
 		%BrushSprite.visible = false
 	
 	_create_grid(_data["width"], _data["height"])
-	for _rule in _data["rules"]:
-		(puzzle_array[(_rule["x"] * 2)+1][(_rule["y"] * 2)+1] as PuzzleRule)._set_rule(_rule["type"], _rule["color"], _rule["number"])
+	if "rules" in _data:
+		for _rule in _data["rules"]:
+			(puzzle_array[(_rule["x"] * 2)+1][(_rule["y"] * 2)+1] as PuzzleRule)._set_rule(_rule["type"], _rule["color"], _rule["number"])
+	if "locks" in _data:
+		for _lock in _data["locks"]:
+			var _line_index := _1d_to_2d_index(_lock)
+			(puzzle_array[_line_index.x][_line_index.y].get_node("Rotation/Button") as PuzzleLine)._set_lock_state(true)
 
 
 func _create_grid(_width: int, _height: int):
@@ -144,6 +160,7 @@ func _create_grid(_width: int, _height: int):
 			var _new_node: Control
 			if (_row + _col) % 2 == 1: # line
 				_new_node = puzzle_line.instantiate()
+				(_new_node.get_node("Rotation/Button") as PuzzleLine).in_editor = in_editor
 				if _row % 2 == 1: # line is vertical
 					(_new_node.get_node("Rotation") as Node2D).rotate(deg_to_rad(90))
 			elif _row % 2 == 0: # vertex
@@ -155,8 +172,16 @@ func _create_grid(_width: int, _height: int):
 			container.add_child(_new_node)
 			puzzle_array[_col].append(_new_node)
 	
-	var zoom_x = 1.0 / (puzzle_width / 5.0)
-	var zoom_y = 1.0 / (puzzle_height / 5.0)
+	var zoom_x: float
+	var zoom_y: float
+	if puzzle_width == 1:
+		zoom_x = 3.0
+	else:
+		zoom_x = 1.0 / (puzzle_width / 5.0)
+	if puzzle_height == 1:
+		zoom_y = 3.0
+	else:
+		zoom_y = 1.0 / (puzzle_height / 5.0)
 	var final_zoom = min(zoom_x, zoom_y) * 0.9
 	%GridZoom.scale = (Vector2(final_zoom, final_zoom))
 
@@ -273,32 +298,105 @@ func _get_neighboring_vertices(_x: int, _y: int, _color: int) -> int:
 			_count += 1
 	return _count
 
-func _get_arrows_count(_x: int, _y: int, _color: int) -> int:
+func _1d_to_2d_index(_index: int) -> Vector2:
+	var _new_indices := Vector2()
+	_new_indices.x = _index % array_width
+	_new_indices.y = floori(_index / array_width)
+	return _new_indices
+
+func _get_rook_count(_x: int, _y: int, _color: int, _limit: int = 0) -> int:
 	# counts only cells extending in the orthogonal directions from the cell
-	# counts its own cell as well
-	var _count: int = 1
+	# does not count its own cell
+	var _count: int = 0
+	var _region := _get_region(_x, _y, _color)
 	for _dir in CARDINAL_DIRECTIONS:
-		var _temp_x: int = _x
-		var _temp_y: int = _y
+		var _temp_x := _x
+		var _temp_y := _y
+		var _temp_limit = 0
 		while true:
-			_temp_x += _dir.x
-			_temp_y += _dir.y
+			_temp_limit += 1
+			if _limit > 0 and _temp_limit > _limit:
+				break
+			_temp_x += _dir.x * 2
+			_temp_y += _dir.y * 2
 			if _temp_x <= 0 or _temp_y <= 0 or _temp_x >= array_width - 1 or _temp_y >= array_height - 1:
 				break
-			var _line_state: int = (puzzle_array[_temp_x][_temp_y].get_node("Rotation/Button") as PuzzleLine)._get_state()
-			if _color == 0: # Black
-				if _line_state >= 2:
-					break
-			elif _line_state == _color:
+			if puzzle_array[_temp_x][_temp_y] not in _region:
 				break
 			
 			_count += 1
-			_temp_x += _dir.x
-			_temp_y += _dir.y
 			
-			assert(_count < puzzle_width + puzzle_height,
-			"arrows rule at (x: "+str((_x - 1) / 2)+",y: "+str((_y - 1) / 2)+") counted more cells than possible")
+			assert(_count < puzzle_width + puzzle_height - 1,
+			"rook rule at (x: "+str((_x - 1) / 2)+",y: "+str((_y - 1) / 2)+") counted more cells than possible")
 	
+	return _count
+
+func _get_bishop_count(_x: int, _y: int, _color: int, _limit: int = 0) -> int:
+	var _count: int = 0
+	var _region := _get_region(_x, _y, _color)
+	for _dir in ORDINAL_DIRECTIONS:
+		var _temp_x := _x
+		var _temp_y := _y
+		var _temp_limit = 0
+		while true:
+			_temp_limit += 1
+			if _limit > 0 and _temp_limit > _limit:
+				break
+			_temp_x += _dir.x * 2
+			_temp_y += _dir.y * 2
+			if _temp_x <= 0 or _temp_y <= 0 or _temp_x >= array_width - 1 or _temp_y >= array_height - 1:
+				break
+			if puzzle_array[_temp_x][_temp_y] not in _region:
+				break
+			
+			_count += 1
+			assert(_count < puzzle_width + puzzle_height - 1,
+			"bishop rule at (x: "+str((_x - 1) / 2)+",y: "+str((_y - 1) / 2)+") counted more cells than possible")
+			
+	return _count
+
+func _get_knight_count(_x: int, _y: int, _color: int) -> int:
+	var _count: int = 0
+	var _region = _get_region(_x, _y, _color) 
+	for _dir in KNIGHT_DIRECTIONS:
+		var _temp_x := _x + (_dir.x * 2)
+		var _temp_y := _y + (_dir.y * 2)
+		if _temp_x <= 0 or _temp_y <= 0 or _temp_x >= array_width - 1 or _temp_y >= array_height - 1:
+			continue
+		if puzzle_array[_temp_x][_temp_y] in _region:
+			_count += 1
+			
+	return _count
+
+func _get_arrow_count(_x: int, _y: int, _color: int, _dir_index: int) -> int:
+	#TODO
+	var _count = 0
+	var _dir: Vector2
+	var _is_orthogonal: bool
+	if _dir_index % 2 == 0:
+		_is_orthogonal = true
+		_dir = CARDINAL_DIRECTIONS[_dir_index / 2]
+	else:
+		_is_orthogonal = false
+		_dir = ORDINAL_DIRECTIONS[(_dir_index - 1) / 2]
+	var _temp_x: int = _x + _dir.x
+	var _temp_y: int = _y + _dir.y
+	while _temp_x >= 0 and _temp_y >= 0 and _temp_x <= array_width - 1 and _temp_y <= array_height - 1:
+		if (_is_orthogonal):
+			if _color == PuzzleConst.ColorID.Black:
+				if (puzzle_array[_temp_x][_temp_y].get_node("Rotation/Button") as PuzzleLine)._get_state() >= 2:
+					_count += 1
+			elif (puzzle_array[_temp_x][_temp_y].get_node("Rotation/Button") as PuzzleLine)._get_state() == _color:
+					_count += 1
+		else:
+			if _color == PuzzleConst.ColorID.Black:
+				if _get_neighboring_line_count(_temp_x, _temp_y, 2) > 0 or _get_neighboring_line_count(_temp_x, _temp_y, 3) > 0:
+					_count += 1
+			else:
+				if _get_neighboring_line_count(_temp_x, _temp_y, _color) > 0:
+					_count += 1
+		_temp_x += _dir.x * 2
+		_temp_y += _dir.y * 2
 	return _count
 
 func _are_eyes_valid(_erased_lines: Array[Vector3]) -> bool:
@@ -375,6 +473,36 @@ func _connect_cell(_region: Array, _x: int, _y: int, _color: int):
 		if puzzle_array[_temp_x][_temp_y] not in _region:
 			_connect_cell(_region, _temp_x, _temp_y, _color)
 
+func _is_region_outside(_region: Array, _color: int) -> bool:
+	for _cell in _region:
+		var _x: int = (_cell as PuzzleRule).grid_x
+		var _y: int = (_cell as PuzzleRule).grid_y
+		var _on_edge: bool = false
+		var _edge_color: int
+		if _x == 1:
+			_on_edge = true
+			_edge_color = (puzzle_array[0][_y].get_node("Rotation/Button") as PuzzleLine)._get_state()
+		elif _x == array_width - 2:
+			_on_edge = true
+			_edge_color = (puzzle_array[array_width - 1][_y].get_node("Rotation/Button") as PuzzleLine)._get_state()
+		if _y == 1:
+			_on_edge = true
+			_edge_color = (puzzle_array[_x][0].get_node("Rotation/Button") as PuzzleLine)._get_state()
+		elif _y == array_height - 2:
+			_on_edge = true
+			_edge_color = (puzzle_array[_x][array_height - 1].get_node("Rotation/Button") as PuzzleLine)._get_state()
+		
+		if not _on_edge:
+			continue
+		if _color == PuzzleConst.ColorID.Black:
+			if _edge_color < 2:
+				return true
+		else:
+			if _edge_color != _color:
+				return true
+	
+	return false
+
 func _play_line_toggle():
 	%LineSFXPlayer.play()
 
@@ -394,13 +522,11 @@ func _on_submit_button_pressed() -> void:
 	else:
 		_play_victory_jingle(false)
 
-
 func _on_prev_button_pressed() -> void:
 	var level_data: JSON = JSON.new()
 	var error = level_data.parse(FileAccess.get_file_as_string("res://level_data/"+prev_level+".json"))
 	if error == OK:
 		_accept_level_data(level_data.data)
-
 
 func _on_next_button_pressed() -> void:
 	var level_data: JSON = JSON.new()
@@ -408,18 +534,13 @@ func _on_next_button_pressed() -> void:
 	if error == OK:
 		_accept_level_data(level_data.data)
 
-
 func _on_reset_button_pressed() -> void:
-	for _x in range(0, array_height, 2):
-		for _y in range(1, array_width, 2):
-			(puzzle_array[_x][_y].get_node("Rotation/Button") as PuzzleLine)._set_state(1)
-	for _x in range(1, array_height, 2):
-		for _y in range(0, array_width, 2):
-			(puzzle_array[_x][_y].get_node("Rotation/Button") as PuzzleLine)._set_state(1)
-	#for _row in puzzle_array:
-	#	for _cell in _row:
-	#		(_cell.get_node("Rotation/Button") as PuzzleLine)._set_state(1)
-
+	for _x in range(0, array_width, 2):
+		for _y in range(1, array_height, 2):
+			(puzzle_array[_x][_y].get_node("Rotation/Button") as PuzzleLine)._reset_state()
+	for _x in range(1, array_width, 2):
+		for _y in range(0, array_height, 2):
+			(puzzle_array[_x][_y].get_node("Rotation/Button") as PuzzleLine)._reset_state()
 
 func _on_menu_button_pressed() -> void:
 	(get_node("../../..") as LevelSelectMenu)._return_from_puzzle()

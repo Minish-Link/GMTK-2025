@@ -31,10 +31,10 @@ unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 312.0
-offset_top = 60.0
-offset_right = 571.0
-offset_bottom = 429.0
+offset_left = 310.0
+offset_top = 73.0
+offset_right = 569.0
+offset_bottom = 458.0
 grow_horizontal = 2
 theme_override_constants/outline_size = 8
 placeholder_text = "Description goes here."
@@ -44,10 +44,10 @@ unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 312.0
-offset_top = 438.0
-offset_right = 571.0
-offset_bottom = 475.0
+offset_left = 310.0
+offset_top = 465.0
+offset_right = 569.0
+offset_bottom = 502.0
 grow_horizontal = 2
 theme_override_constants/outline_size = 8
 placeholder_text = "file_name_goes_here"
@@ -65,10 +65,10 @@ offset_right = -346.0
 offset_bottom = 505.0
 
 [node name="SubmitBack" parent="CanvasLayer" index="11"]
-offset_left = -917.0
-offset_top = 173.0
-offset_right = -657.0
-offset_bottom = 234.0
+offset_left = 309.0
+offset_top = 6.0
+offset_right = 569.0
+offset_bottom = 67.0
 
 [node name="PrevBack" parent="CanvasLayer" index="12"]
 offset_left = -935.0
@@ -162,21 +162,38 @@ horizontal_alignment = 1
 
 [node name="VariantLeft" type="Button" parent="CanvasLayer/RulePickerBack/VariantLabel" index="1"]
 layout_mode = 0
-offset_left = 9.0
+offset_left = 32.0
 offset_top = 5.0
-offset_right = 27.0
+offset_right = 50.0
 offset_bottom = 36.0
 theme_override_font_sizes/font_size = 16
 text = "<"
 
-[node name="VariantRight" type="Button" parent="CanvasLayer/RulePickerBack/VariantLabel" index="2"]
+[node name="VariantFarLeft" type="Button" parent="CanvasLayer/RulePickerBack/VariantLabel" index="2"]
 layout_mode = 0
-offset_left = 195.0
 offset_top = 5.0
-offset_right = 213.0
+offset_right = 27.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "<<"
+
+[node name="VariantRight" type="Button" parent="CanvasLayer/RulePickerBack/VariantLabel" index="3"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 5.0
+offset_right = 190.0
 offset_bottom = 36.0
 theme_override_font_sizes/font_size = 16
 text = ">"
+
+[node name="VariantFarRight" type="Button" parent="CanvasLayer/RulePickerBack/VariantLabel" index="4"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 5.0
+offset_right = 221.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = ">>"
 
 [node name="ColorLabel" type="RichTextLabel" parent="CanvasLayer/RulePickerBack" index="2"]
 layout_mode = 0
@@ -321,10 +338,10 @@ text = ">"
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 349.0
-offset_top = 489.0
-offset_right = 534.0
-offset_bottom = 550.0
+offset_left = 348.0
+offset_top = 509.0
+offset_right = 533.0
+offset_bottom = 570.0
 grow_horizontal = 2
 
 [node name="SaveButton" type="Button" parent="CanvasLayer/SaveBack" index="0"]
@@ -348,9 +365,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 348.0
-offset_top = 565.0
+offset_top = 579.0
 offset_right = 533.0
-offset_bottom = 626.0
+offset_bottom = 640.0
 grow_horizontal = 2
 
 [node name="LoadButton" type="Button" parent="CanvasLayer/LoadBack" index="0"]
@@ -372,7 +389,9 @@ text = "Load"
 [connection signal="pressed" from="CanvasLayer/RulePickerBack/TypeLabel/TypeLeft" to="." method="_on_type_left_pressed"]
 [connection signal="pressed" from="CanvasLayer/RulePickerBack/TypeLabel/TypeRight" to="." method="_on_type_right_pressed"]
 [connection signal="pressed" from="CanvasLayer/RulePickerBack/VariantLabel/VariantLeft" to="." method="_on_variant_left_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/VariantLabel/VariantFarLeft" to="." method="_on_variant_far_left_pressed"]
 [connection signal="pressed" from="CanvasLayer/RulePickerBack/VariantLabel/VariantRight" to="." method="_on_variant_right_pressed"]
+[connection signal="pressed" from="CanvasLayer/RulePickerBack/VariantLabel/VariantFarRight" to="." method="_on_variant_far_right_pressed"]
 [connection signal="pressed" from="CanvasLayer/RulePickerBack/ColorLabel/ColorLeft" to="." method="_on_color_left_pressed"]
 [connection signal="pressed" from="CanvasLayer/RulePickerBack/ColorLabel/ColorRight" to="." method="_on_color_right_pressed"]
 [connection signal="pressed" from="CanvasLayer/BoardChangerBack/WidthLabel/WidthLeft" to="." method="_on_width_left_pressed"]

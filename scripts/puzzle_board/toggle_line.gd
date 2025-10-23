@@ -15,17 +15,21 @@ func _enter_tree():
 
 var state: LineState
 var in_editor: bool = false
+var locked: bool = false
 
 func _on_Button_gui_input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
 				var _new_color: int
-				if in_editor:
-					_new_color = (get_node("../../../../..") as LevelEditor)._get_color()
-				else:
-					_new_color = (get_node("../../../../..") as PuzzleGrid)._get_color()
-				if state == LineState.Pink:
+				_new_color = (get_node("../../../../..") as PuzzleGrid)._get_color()
+				if locked:
+					if in_editor:
+						_set_lock_state(false)
+						state = LineState.Blank
+					else:
+						return
+				elif state == LineState.Pink:
 					state = _new_color as LineState
 				elif state == LineState.Red and _new_color == LineState.Blue:
 					state = _new_color as LineState
@@ -35,22 +39,29 @@ func _on_Button_gui_input(event: InputEvent):
 					state = _new_color as LineState
 				else:
 					state = LineState.Blank
-				if not in_editor:
-					(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
+				(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
 			MOUSE_BUTTON_RIGHT:
-				if state == LineState.Erased:
-					state = LineState.Blank
+				if in_editor:
+					if locked:
+						_set_lock_state(false)
+					elif state == LineState.Erased:
+						_set_lock_state(true)
+					else:
+						state = LineState.Erased
 				else:
-					state = LineState.Erased
-				if not in_editor:
-					(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
+					if state == LineState.Erased:
+						state = LineState.Blank
+					else:
+						state = LineState.Erased
+				(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
 			MOUSE_BUTTON_MIDDLE:
+				if locked:
+					return
 				if state == LineState.Pink:
 					state = LineState.Blank
 				else:
 					state = LineState.Pink
-				if not in_editor:
-					(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
+				(get_node("../../../../..") as PuzzleGrid)._play_line_toggle()
 		_set_color()
 
 func _set_color():
@@ -98,3 +109,19 @@ func _get_state() -> int:
 func _set_state(_new_state: int):
 	state = _new_state as LineState
 	_set_color()
+
+func _reset_state():
+	if locked:
+		if in_editor:
+			_set_state(LineState.Blank)
+			_set_lock_state(false)
+	else:
+		_set_state(LineState.Blank)
+
+func _set_lock_state(_new_state: bool) -> void:
+	locked = _new_state
+	%Lock.visible = _new_state
+	if locked:
+		_set_state(LineState.Erased)
+		if not in_editor:
+			%Button.visible = false

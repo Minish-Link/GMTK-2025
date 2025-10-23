@@ -6,50 +6,64 @@ enum SymbolType {
 	Area = 1,
 	Suit = 2,
 	Eye = 3,
-	Arrows = 4,
-	Triangle = 5,
-	Cross = 6,
-	Key = 7,
+	Rook = 4,
+	Bishop = 5,
+	Queen = 6,
+	Knight = 7,
+	King = 8,
+	Triangle = 9,
+	Cross = 10,
+	Key = 11,
+	Arrow = 12,
+	Page = 13
 }
 const MIN_SYMBOL_COUNTS: Dictionary[int, int] = {
 	SymbolType.Pips: 0,
 	SymbolType.Area: 1,
 	SymbolType.Suit: 0,
 	SymbolType.Eye: 0,
-	SymbolType.Arrows: 1,
+	SymbolType.Rook: 0,
+	SymbolType.Bishop: 0,
+	SymbolType.Queen: 0,
+	SymbolType.Knight: 0,
+	SymbolType.King: 0,
 	SymbolType.Triangle: 0,
 	SymbolType.Cross: 1,
-	SymbolType.Key: 0
+	SymbolType.Key: 0,
+	SymbolType.Arrow: 0,
+	SymbolType.Page: 0
 }
 const MAX_SYMBOL_COUNTS: Dictionary[int, int] = {
 	SymbolType.Pips: 4,
 	SymbolType.Area: 99,
 	SymbolType.Suit: 3,
 	SymbolType.Eye: 3,
-	SymbolType.Arrows: 99,
+	SymbolType.Rook: 28,
+	SymbolType.Bishop: 28,
+	SymbolType.Queen: 56,
+	SymbolType.Knight: 8,
+	SymbolType.King: 8,
 	SymbolType.Triangle: 4,
 	SymbolType.Cross: 4,
-	SymbolType.Key: 7
-}
-const DEFAULT_SYMBOL_COUNTS: Dictionary[int,int] = {
-	SymbolType.Pips: 1,
-	SymbolType.Area: 4,
-	SymbolType.Suit: 0,
-	SymbolType.Eye: 0,
-	SymbolType.Arrows: 5,
-	SymbolType.Triangle: 1,
-	SymbolType.Cross: 1,
-	SymbolType.Key: 0
+	SymbolType.Key: 7,
+	SymbolType.Arrow: 127,
+	SymbolType.Page: 0
 }
 const SYMBOL_STRINGS: Dictionary[int, String] = {
 	SymbolType.Pips: "pips",
 	SymbolType.Area: "area",
 	SymbolType.Suit: "suit",
 	SymbolType.Eye: "eye",
-	SymbolType.Arrows: "arrows",
+	SymbolType.Rook: "rook",
+	SymbolType.Bishop: "bishop",
+	SymbolType.Queen: "queen",
+	SymbolType.Knight: "knight",
+	SymbolType.King: "king",
 	SymbolType.Triangle: "triangle",
 	SymbolType.Cross: "cross",
-	SymbolType.Key: "key"
+	SymbolType.Key: "key",
+	SymbolType.Arrow: "arrow",
+	SymbolType.Page: "page"
 }
 const MIN_COLOR: int = 0
 const MAX_COLOR: int = 3
@@ -74,6 +88,7 @@ var selected_rule_color: int = 0
 func _init() -> void:
 	super()
 	puzzle_rule = editor_rule
+	in_editor = true
 
 func _ready() -> void:
 	_create_grid(4,4)
@@ -117,6 +132,12 @@ func _save_board_to_json() -> void:
 				continue
 			_json_rules.append((puzzle_array[_x][_y] as PuzzleRule)._convert_to_dict())
 	level_data["rules"] = _json_rules
+	var _json_locks: Array = []
+	for _line in range(1, array_size, 2):
+		var _line_index := _1d_to_2d_index(_line)
+		if (puzzle_array[_line_index.x][_line_index.y].get_node("Rotation/Button") as PuzzleLine).locked:
+			_json_locks.append(_line)
+	level_data["locks"] = _json_locks
 	print("res://level_data/editor/"+%FileName.text+".json")
 	var _level_file := FileAccess.open("res://level_data/editor/"+%FileName.text+".json", FileAccess.WRITE)
 	if _level_file != null:
@@ -142,7 +163,7 @@ func _on_type_left_pressed() -> void:
 		selected_rule_type -= 1
 	else:
 		selected_rule_type = SymbolType.size() - 1
-	selected_rule_variant = DEFAULT_SYMBOL_COUNTS[selected_rule_type]
+	selected_rule_variant = MIN_SYMBOL_COUNTS[selected_rule_type]
 	_update_rule_preview()
 
 func _on_type_right_pressed() -> void:
@@ -150,7 +171,7 @@ func _on_type_right_pressed() -> void:
 		selected_rule_type += 1
 	else:
 		selected_rule_type = 0
-	selected_rule_variant = DEFAULT_SYMBOL_COUNTS[selected_rule_type]
+	selected_rule_variant = MIN_SYMBOL_COUNTS[selected_rule_type]
 	_update_rule_preview()
 
 func _on_variant_left_pressed() -> void:
@@ -166,7 +187,19 @@ func _on_variant_right_pressed() -> void:
 	else:
 		selected_rule_variant = MIN_SYMBOL_COUNTS[selected_rule_type]
 	_update_rule_preview()
-	
+
+func _on_variant_far_left_pressed() -> void:
+	selected_rule_variant -= 8
+	if selected_rule_variant < MIN_SYMBOL_COUNTS[selected_rule_type]:
+		selected_rule_variant = MIN_SYMBOL_COUNTS[selected_rule_type]
+	_update_rule_preview()
+
+func _on_variant_far_right_pressed() -> void:
+	selected_rule_variant += 8
+	if selected_rule_variant > MAX_SYMBOL_COUNTS[selected_rule_type]:
+		selected_rule_variant = MAX_SYMBOL_COUNTS[selected_rule_type]
+	_update_rule_preview()
+
 func _on_color_left_pressed() -> void:
 	if selected_rule_color > MIN_COLOR:
 		selected_rule_color -= 1

@@ -266,7 +266,7 @@ bus = &"SFX"
 
 [node name="Particles" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
-z_index = 2
+z_index = 5
 emitting = false
 amount = 50
 texture = ExtResource("4_d0j8h")
